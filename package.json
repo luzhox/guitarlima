@@ -1,0 +1,46 @@
+{
+    "name": "aquila",
+    "version": "1.0.0",
+    "description": "Aquila theme packages",
+    "main": "main.js",
+    "scripts": {
+        "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
+        "dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
+        "clean": "rm -rf build/*",
+        "brow": "browser-sync start --proxy 'unalm.local' --files '**/*' --no-notify"
+    },
+    "keywords": [
+        "wordpress",
+        "themes"
+    ],
+    "author": "Imran Sayed",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@babel/core": "^7.11.1",
+        "@babel/preset-env": "^7.11.0",
+        "babel-loader": "^8.1.0",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "cross-env": "^7.0.2",
+        "css-loader": "^4.2.1",
+        "cssnano": "^4.1.10",
+        "file-loader": "^6.0.0",
+        "mini-css-extract-plugin": "^0.9.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "postcss-loader": "^6.1.0",
+        "sass": "^1.34.1",
+        "sass-loader": "^10.2.0",
+        "style-loader": "^1.3.0",
+        "uglifyjs-webpack-plugin": "^2.2.0",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12"
+    },
+    "browserslist": [
+        "defaults"
+    ],
+    "dependencies": {
+        "browser-sync": "^2.26.14",
+        "node-sass": "^7.0.0"
+    }
+}

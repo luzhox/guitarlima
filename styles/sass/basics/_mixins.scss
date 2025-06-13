@@ -1,0 +1,14 @@
+@mixin border-radius($number) {
+  -webkit-border-radius: $number;
+  -moz-border-radius: $number;
+  -ms-border-radius: $number;
+  border-radius: $number;
+}
+
+@mixin transition($number) {
+  -webkit-transition: all $number ease-in-out;
+  -moz-transition: all $number ease-in-out;
+  -ms-transition: all $number ease-in-out;
+  -o-transition: all $number ease-in-out;
+  transition: all $number ease-in-out;
+}

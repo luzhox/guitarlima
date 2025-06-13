@@ -1,0 +1,42 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 700;
+    color: $gray;
+    letter-spacing: -0.4px;
+}
+
+h2 {
+    margin-top: 16px;
+
+    &.title p {
+        font-size: 28px;
+        line-height: 130%;
+        text-align: center;
+        color: $gray;
+        font-weight: 300;
+
+        strong {
+            font-weight: 700;
+        }
+
+        @include tablet {
+            font-size: 44px;
+        }
+    }
+}
+
+p {
+    font-family: $primary-text;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -0.2px;
+    line-height: 34px;
+    color: $gray;
+
+    @include tablet {
+        font-size: 24px;
+    }
+}
