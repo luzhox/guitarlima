@@ -2,7 +2,7 @@
     display: none;
 
     .overlay {
-        background: $overlay;
+        background: $color-overlay;
         position: fixed;
         top: 0;
         left: 0;
@@ -50,7 +50,7 @@
 
         .modal-content {
             h2 {
-                color: $gray;
+                color: $color-gray;
                 font-weight: 600;
                 text-align: left;
 
@@ -64,7 +64,7 @@
             p {
                 font-size: 14px;
                 line-height: 17px;
-                color: $gray;
+                color: $color-gray;
             }
 
             .input-radio {
@@ -73,7 +73,7 @@
                 font-size: 12px;
                 line-height: 15px;
                 align-items: center;
-                color: $gray;
+                color: $color-gray;
                 margin-top: 16px;
                 margin-bottom: 16px;
 

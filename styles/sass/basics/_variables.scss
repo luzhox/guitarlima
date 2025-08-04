@@ -1,21 +1,30 @@
-$primary: #065A98;
-$primary-hover: #0668ad;
-$color-primary-text-button:white;
-$color-sandwich: #98c9ec;
-$gray:#383A3F;
-$lightgray:#dbe3f2;
+
+// Brand Colors
+$color-primary: #3858e9;
+$color-primary-hover: #375af7;
+$color-primary-text: white;
+$color-primary-gradient:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 
 
-$colorMenuButton: white;
-$hoverDesktopSubMenu:#eff3fc;
-$colorActiveMenuText: #5daee8;
-$colorActiveMenu: #5daee8;
-$colorsSubMenu:#383A3F;
-$bgSubMenu:white;
+// Neutral Colors
+$color-gray: #383A3F;
+$color-gray-light: #dbe3f2;
+$color-white: white;
 
-$shadow: -0px 6px 20px rgba(0, 0, 0, 0.25);
-$overlay:linear-gradient(90deg, rgba(35, 28, 19, 0.6) 24.32%, rgba(47, 37, 25, 0) 100.16%);
-$primary-text:'Poppins',
-Arial,
-Helvetica,
-sans-serif;
+// Menu Colors
+$color-menu-button: $color-white;
+$color-menu-hover: #eff3fc;
+$color-menu-active: #3858e9;
+$color-menu-active-text: #3858e9;
+$color-submenu-text: $color-gray;
+$color-submenu-bg: $color-white;
+$color-overlay: rgba(0, 0, 0, 0.5);
+
+// UI Elements
+$color-sandwich: #fbb66d;
+$shadow-default: -0px 6px 20px rgba(0, 0, 0, 0.25);
+$overlay-gradient: linear-gradient(90deg, rgba(35, 28, 19, 0.6) 24.32%, rgba(47, 37, 25, 0) 100.16%);
+
+
+// Typography
+$font-primary: 'Futura PT', Arial, Helvetica, sans-serif;

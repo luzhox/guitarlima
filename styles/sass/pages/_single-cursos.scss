@@ -1,0 +1,49 @@
+.single-curso{
+        background: linear-gradient(105.9deg, #140f2f 24.4%, #0b0a10 80.5%);
+
+
+  &__header{
+    overflow: hidden;
+
+    max-height: 500px;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    h1{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: #fff;
+      font-size: 40px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  .video{
+    text-align: center;
+    iframe{
+      width: 100%;
+      max-width: 800px;
+      height: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      object-position: center;
+      position: relative;
+      top: -150px;
+      margin: 0 auto;
+    }
+  }
+}

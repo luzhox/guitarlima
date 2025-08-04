@@ -9,8 +9,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<link rel="icon" type="image/png" href="<?php echo site_icon_url() ?>">
 	<title><?php wp_title(''); ?> <?php if(wp_title('',false)){echo':';} ?> <?php bloginfo('name') ?></title>
-	<meta name="theme-color" content="#ec6a03"/>
-	<meta name="msapplication-navbutton-color" content="#ec6a03"/>
+	<meta name="theme-color" content="#140f2f"/>
+	<meta name="msapplication-navbutton-color" content="#140f2f"/>
 	<?php wp_head(); ?>
 </head>
 

@@ -1,10 +1,28 @@
+@font-face {
+    font-family: 'Futura PT';
+    src: url('https://glmusic.pe/wp-content/themes/guitarlima/fonts/futura-italic2.woff2') format('woff2'),
+         url('https://glmusic.pe/wp-content/themes/guitarlima/fonts/futura-italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'Futura PT';
+    src: url('https://glmusic.pe/wp-content/themes/guitarlima/fonts/futura_pt_book-webfont.woff2') format('woff2'),
+         url('https://glmusic.pe/wp-content/themes/guitarlima/fonts/futura_pt_book-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+
 h1,
 h2,
 h3,
 h4,
 h5 {
     font-weight: 700;
-    color: $gray;
+    color: $color-gray;
     letter-spacing: -0.4px;
 }
 
@@ -15,7 +33,7 @@ h2 {
         font-size: 28px;
         line-height: 130%;
         text-align: center;
-        color: $gray;
+        color: $color-gray;
         font-weight: 300;
 
         strong {
@@ -29,12 +47,12 @@ h2 {
 }
 
 p {
-    font-family: $primary-text;
+    font-family: $font-primary;
     font-weight: 300;
     font-size: 18px;
     letter-spacing: -0.2px;
     line-height: 34px;
-    color: $gray;
+    color: $color-gray;
 
     @include tablet {
         font-size: 24px;

@@ -21,7 +21,7 @@
     "files.trimTrailingWhitespace": true,
     "editor.wordWrap": "off",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
     "diffEditor.ignoreTrimWhitespace": false,
     "emmet.includeLanguages": {

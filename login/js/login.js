@@ -11,6 +11,6 @@ $("body").vegas({
 });
 
 $('#login h1, #login form').wrapAll('<div class="grupo"></div>');
-$('#login h1 a').attr('href','http://www.chronsult.com/');
+$('#login h1 a').attr('href','https://glmusic.pe/');
 
 });

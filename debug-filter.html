@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Course PerCat Filter</title>
+    <style>
+        .course-percat__filters {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .course-percat__filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #ccc;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+        .course-percat__filter-btn.active {
+            background: #007cba;
+            color: white;
+            border-color: #007cba;
+        }
+        .course-percat__item {
+            display: inline-block;
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .course-percat__item.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="course-percat" data-module="course-percat">
+        <div class="course-percat__filters">
+            <button class="course-percat__filter-btn active" data-category="all">Todos</button>
+            <button class="course-percat__filter-btn" data-category="guitarra">Guitarra</button>
+            <button class="course-percat__filter-btn" data-category="piano">Piano</button>
+            <button class="course-percat__filter-btn" data-category="bateria">Batería</button>
+        </div>
+
+        <div class="course-percat__items">
+            <div class="course-percat__item category-guitarra category-piano">
+                <h3>Curso de Guitarra Básico</h3>
+                <p>Categorías: Guitarra, Piano</p>
+            </div>
+            <div class="course-percat__item category-guitarra">
+                <h3>Curso de Guitarra Avanzado</h3>
+                <p>Categorías: Guitarra</p>
+            </div>
+            <div class="course-percat__item category-piano">
+                <h3>Curso de Piano Básico</h3>
+                <p>Categorías: Piano</p>
+            </div>
+            <div class="course-percat__item category-bateria">
+                <h3>Curso de Batería</h3>
+                <p>Categorías: Batería</p>
+            </div>
+            <div class="course-percat__item category-guitarra category-bateria">
+                <h3>Curso Mixto</h3>
+                <p>Categorías: Guitarra, Batería</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded');
+
+            var coursePerCatElements = document.querySelectorAll('[data-module="course-percat"]');
+            console.log('Found course-percat elements:', coursePerCatElements.length);
+
+            coursePerCatElements.forEach(function(element, index) {
+                console.log('Processing element', index);
+
+                var filterButtons = element.querySelectorAll('.course-percat__filter-btn');
+                var items = element.querySelectorAll('.course-percat__item');
+
+                console.log('Element', index, 'has', filterButtons.length, 'filter buttons and', items.length, 'items');
+
+                // Add click handlers
+                filterButtons.forEach(function(button) {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        var category = this.getAttribute('data-category');
+                        console.log('Button clicked:', category);
+
+                        // Update active button
+                        filterButtons.forEach(function(btn) {
+                            btn.classList.remove('active');
+                        });
+                        this.classList.add('active');
+
+                        // Filter items
+                        items.forEach(function(item) {
+                            if (category === 'all') {
+                                item.style.display = 'block';
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            } else {
+                                var hasCategory = item.classList.contains('category-' + category);
+                                console.log('Item has category', category, ':', hasCategory);
+
+                                if (hasCategory) {
+                                    item.style.display = 'block';
+                                    item.style.opacity = '1';
+                                    item.style.transform = 'scale(1)';
+                                } else {
+                                    item.style.opacity = '0';
+                                    item.style.transform = 'scale(0.8)';
+                                    setTimeout(function() {
+                                        item.style.display = 'none';
+                                    }, 300);
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -12,9 +12,9 @@ $(document).ready(function () {
     if ($(window).scrollTop() > 70) {
       if (prevScrollpos > currentScrollPos) {
         $('#masthead').addClass('actived')
-        $('#brand').data('brandtwo')
+        $('#brand').data('brand')
         $('#masthead').css('top', '0')
-        $('#brand').attr('src', $('#brand').data('brandtwo'))
+        $('#brand').attr('src', $('#brand').data('brand'))
       } else {
         $('#masthead').css('top', '-125px')
         prevScrollpos = currentScrollPos
@@ -22,7 +22,7 @@ $(document).ready(function () {
     } else {
       const brand = $('#brand').data('brand')
       if ($('#masthead').hasClass('proyect')) return $('#masthead').removeClass('actived')
-      $('#brand').attr('src', $('#brand').data('brandtwo'))
+      $('#brand').attr('src', $('#brand').data('brand'))
       $('#masthead').removeClass('actived'), $('#brand').attr('src', brand)
     }
 
