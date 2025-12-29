@@ -244,3 +244,39 @@ $filter-btn-transition: all 0.3s ease;
     }
   }
 }
+
+// Level tag styles
+.level-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  margin-top: 12px;
+
+  &.level-principiante {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+  }
+
+  &.level-intermedio {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    box-shadow: 0 2px 4px rgba(255, 152, 0, 0.3);
+  }
+
+  &.level-avanzado {
+    background: linear-gradient(135deg, #F44336, #D32F2F);
+    color: white;
+    box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+  }
+
+  @include mobile {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+}

@@ -1,0 +1,124 @@
+.schedule-order{
+  .container{
+    display: flex;
+    flex-flow:wrap;
+  }
+  &__card{
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 1px solid #dddcf2;
+    border-radius: 12px;
+    &:first-child{
+      margin-bottom: 24px;
+    }
+    @include desktop{
+      &:first-child{
+        margin-bottom: 0px;
+      }
+    }
+
+
+    .text{
+      text-align: center;
+      padding: 32px;
+
+      a,button{
+        min-width: 180px;
+        margin-bottom: 12px;
+        font-size: 16px;
+      }
+      p{
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 140%;
+        margin-bottom: 0px;
+        color: #383a3f;
+        text-transform: 0.8px;
+        font-family:'Marvel',sans-serif;
+      }
+    }
+    @include desktop{
+      max-width: calc(50% - 12px);
+    }
+    .img{
+      img{
+        width: 100%;
+        display: block;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+.modal-schedule-order{
+  .modal-container{
+    padding: 0px;
+    overflow: hidden;
+
+  }
+  &__list{
+    display: flex;
+    flex-flow:column;
+    overflow-y: auto;
+    max-height: 300px;
+    margin-top: 16px;
+  }
+  .modal-content{
+    display: flex;
+    flex-flow: wrap;
+    padding: 0px;
+    overflow: hidden;
+    justify-content: space-around;
+    .img{
+      width: 100%;
+      img{
+        width: 100%;
+        display: block;
+        height:100%;
+        object-fit: cover;
+      }
+      @include desktop{
+        max-width: calc(50%);
+      }
+    }
+    .text{
+      width: 100%;
+      max-width: 360px;
+      h2{
+        font-size: 24px;
+        line-height: 130%;
+        @include desktop{
+          padding-right:24px;
+        }
+      }
+      padding: 16px;
+      p{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 140%;
+        margin-bottom: 0px;
+        color: #383a3f;
+      }
+      a{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      .modal-schedule-order__list{
+        display: flex;
+        flex-flow: wrap;
+        .modal-schedule-order__list__item{
+          width: 100%;
+        }
+      }
+      @include desktop{
+        max-width: calc(50%);
+      }
+    }
+
+  }
+}

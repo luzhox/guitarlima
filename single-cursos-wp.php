@@ -31,7 +31,9 @@
           <button class="course-reproduction__item-button" data-video="<?php the_field('idVideo'); ?>">
             <h2><?php the_title(); ?></h2>
           </button>
-
+          <div class="course-reproduction__item-favorite">
+            <?php gl_the_favorite_heart_button_small(get_the_ID()); ?>
+          </div>
         </div>
       <?php endwhile;
       wp_reset_postdata(); ?>
@@ -46,7 +48,12 @@
         <?php if ($image): ?>
           <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
         <?php endif; ?>
-        <h3>Sobre el curso</h3>
+        <div class="course-reproduction__description__header">
+          <h3>Sobre el curso</h3>
+          <div class="course-reproduction__favorite">
+            <?php gl_the_favorite_heart_button(get_the_ID()); ?>
+          </div>
+        </div>
         <p><?php the_field('description'); ?></p>
       </div>
     </div>

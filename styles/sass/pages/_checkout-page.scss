@@ -1,0 +1,49 @@
+.checkout-page {
+  .ui-datepicker {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+    .ui-datepicker .ui-widget-header,
+    .ui-datepicker .ui-datepicker-header {
+      background: #222828;
+
+
+    }
+
+    .ui-datepicker-month,
+    .ui-datepicker-year {}
+
+    .ui-datepicker-current-day {
+      background: #222828;
+      color: #fff;
+      font-size: 24px;
+    }
+  }
+
+
+
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+  background: #222828 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+}
+
+.ui-datepicker .ui-widget-header,
+.ui-datepicker .ui-datepicker-header {
+  background: #222828;
+
+
+}
+
+.available-deliveries,
+.available-deliveries a {
+  background: #222828 !important;
+  color: #fff !important;
+
+}

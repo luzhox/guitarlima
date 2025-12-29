@@ -61,6 +61,9 @@
                                     "default_value": "",
                                     "enable_opacity": false,
                                     "return_format": "string",
+                                    "custom_palette_source": "",
+                                    "palette_colors": "",
+                                    "show_color_wheel": true,
                                     "parent_repeater": "field_5f683c5000d25"
                                 },
                                 {
@@ -281,7 +284,10 @@
                             },
                             "default_value": "",
                             "enable_opacity": false,
-                            "return_format": "string"
+                            "return_format": "string",
+                            "custom_palette_source": "",
+                            "palette_colors": "",
+                            "show_color_wheel": true
                         },
                         {
                             "key": "field_605e631f4c438",
@@ -492,6 +498,32 @@
                             "load_terms": 0,
                             "return_format": "object",
                             "field_type": "multi_select",
+                            "allow_null": 0,
+                            "allow_in_bindings": 0,
+                            "bidirectional": 0,
+                            "multiple": 0,
+                            "bidirectional_target": []
+                        },
+                        {
+                            "key": "field_68b2f3f34cbb3",
+                            "label": "Categoria inicial",
+                            "name": "initial_category",
+                            "aria-label": "",
+                            "type": "taxonomy",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "taxonomy": "category",
+                            "add_term": 0,
+                            "save_terms": 1,
+                            "load_terms": 1,
+                            "return_format": "object",
+                            "field_type": "select",
                             "allow_null": 0,
                             "allow_in_bindings": 0,
                             "bidirectional": 0,
@@ -1010,6 +1042,24 @@
                                     "media_upload": 1,
                                     "delay": 0,
                                     "parent_repeater": "field_6884da1d68423"
+                                },
+                                {
+                                    "key": "field_689b4dd490162",
+                                    "label": "Boton",
+                                    "name": "button",
+                                    "aria-label": "",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "allow_in_bindings": 0,
+                                    "parent_repeater": "field_6884da1d68423"
                                 }
                             ]
                         }
@@ -1061,6 +1111,24 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_6926e5e3ec4c3": {
+                    "key": "layout_6926e5e3ec4c3",
+                    "name": "cart-page",
+                    "label": "Carrito",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6926e604d36fe": {
+                    "key": "layout_6926e604d36fe",
+                    "name": "checkout-page",
+                    "label": "Checkout",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -1095,5 +1163,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1754281036
+    "display_title": "",
+    "modified": 1764156945
 }

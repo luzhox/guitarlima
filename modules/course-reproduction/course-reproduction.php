@@ -10,26 +10,39 @@
     <div class="course-reproduction__list__title">
       <h3>Listado de reproducciones</h3>
     </div>
-	  <?php $catname = get_sub_field('cat');?>
+    <?php $catname = get_sub_field('cat'); ?>
     <?php $args = array(
       'posts_per_page' => -1,
       'post_type' => 'cursos',
-      'cat' =>  $catname,
+      'cat' => $catname,
       'order' => 'ASC',
       'orderby' => 'title'
     );
 
     ?>
     <div class="course-reproduction__list__content">
-		<?php echo $catname ?>
+      <?php echo $catname ?>
       <?php $family = new WP_Query($args); ?>
       <?php while ($family->have_posts()):
         $family->the_post(); ?>
-        <div class="course-reproduction__item">
+        <div class="course-reproduction__item" style="position: relative;">
           <button class="course-reproduction__item-button" data-video="<?php the_field('idVideo'); ?>">
             <h2><?php the_title(); ?></h2>
           </button>
-
+          <div class="course-reproduction__item-favorite"
+            style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); z-index: 5; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 50%;">
+            <!-- Botón de favoritos manual -->
+            <button class="favorite-heart-btn favorite-heart-btn--small" data-post-id="<?php echo get_the_ID(); ?>"
+              data-favorited="false" title="Agregar a favoritos"
+              style="background: rgba(255, 255, 255, 0.1); border: none; border-radius: 50%; padding: 6px; cursor: pointer; transition: all 0.3s ease;">
+              <svg class="favorite-heart-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg" style="color: #fff; fill: #fff;">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  fill="currentColor" />
+              </svg>
+            </button>
+          </div>
         </div>
       <?php endwhile;
       wp_reset_postdata(); ?>

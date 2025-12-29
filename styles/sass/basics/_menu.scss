@@ -5,7 +5,12 @@
     align-items: center;
   }
 }
-.btn-favs{
+.fav{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.btn-favs,.login-btn-mov{
   color: white!important;
   font-family: $font-primary;
   font-size: 14px!important;
@@ -15,7 +20,12 @@
   margin-left: 24px;
   position: relative;
   text-align: left;
-  @include mobile{
+  width: 100%;
+  border-radius: 0px;
+  border: 0px;
+  border-bottom: 1px solid $color-gray-light;
+
+  @media only screen and (max-width: 1025px) {
     margin-left: 0px;
     padding: 24px 12px;
   }
@@ -468,7 +478,8 @@
       .main-navegation {
         height: 100vh;
         background: black;
-
+        align-items: flex-start;
+        flex-flow: column;
         @include desktop {
           background: transparent;
           height: auto;
@@ -606,7 +617,7 @@
     background: $color-primary-gradient;
     border:0px;
   }
-  @include mobile {
+  @media only screen and (max-width: 1025px) {
     margin-left: 0;
     margin-top: 15px;
     justify-content: center;
@@ -632,7 +643,7 @@
       display: inline-block;
     }
 
-    @include mobile {
+    @media only screen and (max-width: 1025px) {
       width: 100%;
       justify-content: center;
       padding: 12px 20px;

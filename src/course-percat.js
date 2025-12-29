@@ -34,14 +34,28 @@
     this.setupInitialState();
   };
 
-  CoursePerCat.prototype.setupInitialState = function() {
-    // Set initial active state to "all" button if it exists
-    const $allButton = this.$filterButtons.filter('[data-category="all"]');
-    if ($allButton.length > 0) {
-      this.updateActiveButton($allButton);
+    CoursePerCat.prototype.setupInitialState = function() {
+    // Get initial category from data attribute
+    const $filtersContainer = this.$el.find('.course-percat__filters');
+    const initialCategory = $filtersContainer.data('initial-category') || 'all';
+
+    console.log('CoursePerCat: Initial category from data attribute:', initialCategory);
+    console.log('CoursePerCat: Available filter buttons:', this.$filterButtons.map(function() { return $(this).data('category'); }).get());
+
+    // Find the button for the initial category
+    const $initialButton = this.$filterButtons.filter('[data-category="' + initialCategory + '"]');
+
+    console.log('CoursePerCat: Found initial button:', $initialButton.length > 0 ? $initialButton.text() : 'none');
+
+    if ($initialButton.length > 0) {
+      this.updateActiveButton($initialButton);
+      // Apply initial filter
+      this.filterItems(initialCategory);
+      console.log('CoursePerCat: Applied initial filter for category:', initialCategory);
     } else if (this.$filterButtons.length > 0) {
-      // If no "all" button, activate the first one
+      // Fallback to first button if initial category not found
       this.updateActiveButton(this.$filterButtons.first());
+      console.log('CoursePerCat: Fallback to first button');
     }
   };
 

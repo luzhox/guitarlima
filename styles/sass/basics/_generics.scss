@@ -65,6 +65,25 @@ input[type="number"] {
         display: block;
     }
 }
+.hide-on-medium-onlytwo {
+    display: none;
+
+    @include tablet {
+        display: flex!important;
+        margin-top: 0px!important;
+        min-width: max-content;
+    }
+    @include desktop{
+        display: none!important;
+    }
+}
+.hide-on-desktop-only {
+    display: flex !important;
+
+    @include desktop {
+        display: none !important;
+    }
+}
 
 .hide-tablet-on-up {
     display: inline-block;

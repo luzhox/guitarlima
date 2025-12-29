@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Categoría Inicial</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .course-percat {
+            padding: 2rem;
+            font-family: Arial, sans-serif;
+        }
+        .course-percat__filters {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .course-percat__filter-btn {
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .course-percat__filter-btn.active {
+            background: #007cba;
+            color: white;
+            border-color: #007cba;
+        }
+        .course-percat__filter-btn:hover {
+            background: #f0f0f0;
+        }
+        .course-percat__filter-btn.active:hover {
+            background: #005a87;
+        }
+        .course-percat__items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .course-percat__item {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .course-percat__item.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+        .debug-info {
+            background: #f0f0f0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prueba de Categoría Inicial - Course PerCat</h1>
+
+    <div class="debug-info">
+        <strong>Instrucciones:</strong><br>
+        1. Abre la consola del navegador (F12)<br>
+        2. Recarga la página<br>
+        3. Verifica que se aplique el filtro inicial automáticamente<br>
+        4. Prueba hacer clic en diferentes botones
+    </div>
+
+    <!-- Prueba 1: Con categoría inicial "piano" -->
+    <div class="course-percat" data-module="course-percat">
+        <h2>Prueba 1: Categoría inicial "piano"</h2>
+        <div class="course-percat__filters" data-initial-category="piano">
+            <button class="course-percat__filter-btn" data-category="all">Todos</button>
+            <button class="course-percat__filter-btn active" data-category="guitarra">Guitarra</button>
+            <button class="course-percat__filter-btn" data-category="piano">Piano</button>
+            <button class="course-percat__filter-btn" data-category="bateria">Batería</button>
+        </div>
+
+        <div class="course-percat__items">
+            <div class="course-percat__item category-guitarra">
+                <h3>Curso de Guitarra Básico</h3>
+                <p>Categoría: Guitarra</p>
+            </div>
+            <div class="course-percat__item category-piano">
+                <h3>Curso de Piano Intermedio</h3>
+                <p>Categoría: Piano</p>
+            </div>
+            <div class="course-percat__item category-bateria">
+                <h3>Curso de Batería Avanzado</h3>
+                <p>Categoría: Batería</p>
+            </div>
+            <div class="course-percat__item category-guitarra category-piano">
+                <h3>Curso Mixto Guitarra-Piano</h3>
+                <p>Categorías: Guitarra, Piano</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prueba 2: Sin categoría inicial (por defecto "Todos") -->
+    <div class="course-percat" data-module="course-percat">
+        <h2>Prueba 2: Sin categoría inicial (por defecto "Todos")</h2>
+        <div class="course-percat__filters" data-initial-category="all">
+            <button class="course-percat__filter-btn active" data-category="all">Todos</button>
+            <button class="course-percat__filter-btn" data-category="guitarra">Guitarra</button>
+            <button class="course-percat__filter-btn" data-category="piano">Piano</button>
+            <button class="course-percat__filter-btn" data-category="bateria">Batería</button>
+        </div>
+
+        <div class="course-percat__items">
+            <div class="course-percat__item category-guitarra">
+                <h3>Curso de Guitarra Básico</h3>
+                <p>Categoría: Guitarra</p>
+            </div>
+            <div class="course-percat__item category-piano">
+                <h3>Curso de Piano Intermedio</h3>
+                <p>Categoría: Piano</p>
+            </div>
+            <div class="course-percat__item category-bateria">
+                <h3>Curso de Batería Avanzado</h3>
+                <p>Categoría: Batería</p>
+            </div>
+            <div class="course-percat__item category-guitarra category-piano">
+                <h3>Curso Mixto Guitarra-Piano</h3>
+                <p>Categorías: Guitarra, Piano</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Versión simplificada del JavaScript para pruebas
+        function CoursePerCat($el) {
+            this.$el = $el;
+            this.$filterButtons = $el.find('.course-percat__filter-btn');
+            this.$items = $el.find('.course-percat__item');
+            this.animationDuration = 250;
+            this.isAnimating = false;
+
+            console.log('CoursePerCat: Initializing module');
+            console.log('CoursePerCat: Found', this.$filterButtons.length, 'filter buttons');
+            console.log('CoursePerCat: Found', this.$items.length, 'items');
+
+            this.init();
+        }
+
+        CoursePerCat.prototype.init = function() {
+            this.bindEvents();
+            this.setupInitialState();
+        };
+
+        CoursePerCat.prototype.setupInitialState = function() {
+            const $filtersContainer = this.$el.find('.course-percat__filters');
+            const initialCategory = $filtersContainer.data('initial-category') || 'all';
+
+            console.log('CoursePerCat: Initial category from data attribute:', initialCategory);
+            console.log('CoursePerCat: Available filter buttons:', this.$filterButtons.map(function() {
+                return $(this).data('category');
+            }).get());
+
+            const $initialButton = this.$filterButtons.filter('[data-category="' + initialCategory + '"]');
+
+            console.log('CoursePerCat: Found initial button:', $initialButton.length > 0 ? $initialButton.text() : 'none');
+
+            if ($initialButton.length > 0) {
+                this.updateActiveButton($initialButton);
+                this.filterItems(initialCategory);
+                console.log('CoursePerCat: Applied initial filter for category:', initialCategory);
+            } else if (this.$filterButtons.length > 0) {
+                this.updateActiveButton(this.$filterButtons.first());
+                console.log('CoursePerCat: Fallback to first button');
+            }
+        };
+
+        CoursePerCat.prototype.bindEvents = function() {
+            const self = this;
+
+            this.$filterButtons.on('click', function(e) {
+                e.preventDefault();
+
+                const $button = $(this);
+                const category = $button.data('category');
+
+                console.log('CoursePerCat: Button clicked, category:', category);
+
+                if (!category) {
+                    console.warn('CoursePerCat: Button missing data-category attribute');
+                    return;
+                }
+
+                self.filterItems(category);
+                self.updateActiveButton($button);
+            });
+        };
+
+        CoursePerCat.prototype.filterItems = function(category) {
+            console.log('CoursePerCat: Filtering items for category:', category);
+            console.log('CoursePerCat: Total items to filter:', this.$items.length);
+
+            this.isAnimating = true;
+
+            this.$items.each(function(index) {
+                const $item = $(this);
+                const hasCategory = category === 'all' || $item.hasClass('category-' + category);
+
+                console.log('CoursePerCat: Item', index + 1, 'has category', category + ':', hasCategory, 'Classes:', $item.attr('class'));
+
+                if (hasCategory) {
+                    $item.removeClass('hidden').show();
+                } else {
+                    $item.addClass('hidden');
+                }
+            });
+
+            this.isAnimating = false;
+        };
+
+        CoursePerCat.prototype.updateActiveButton = function($activeButton) {
+            this.$filterButtons.removeClass('active');
+            $activeButton.addClass('active');
+        };
+
+        // Inicializar cuando el DOM esté listo
+        $(document).ready(function() {
+            console.log('DOM ready, initializing CoursePerCat modules');
+
+            $('[data-module="course-percat"]').each(function() {
+                new CoursePerCat($(this));
+            });
+        });
+    </script>
+</body>
+</html>

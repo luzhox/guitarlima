@@ -1,0 +1,143 @@
+.product-single {
+  img {
+    border-radius: 25px;
+    padding: 10px;
+  }
+
+  .payment {
+    margin-top: 16px;
+    text-align: center;
+
+    img {
+      width: 100%;
+      padding: 0px !important;
+      margin-bottom: 16px;
+      height: auto;
+    }
+  }
+
+  .woocommerce-Price-amount {
+    font-size: 28px !important;
+    color: #e0193a !important;
+    font-family: 'Marvel', sans-serif;
+    font-weight: 700;
+    line-height: 120%;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .woocommerce div.product form.cart .button {
+    min-height: 46px;
+    margin-left: 8px;
+  }
+
+  .woocommerce .quantity .qty {
+    min-height: 46px;
+    border-radius: 10px;
+    padding: 10px;
+    // font-family: $primary-text;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .category {
+    margin-top: 32px;
+    color: #000;
+    // font-family: $primary-text;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    /* 25.6px */
+    letter-spacing: 0.64px;
+
+    a {
+      color: #000;
+      // font-family: $primary-text;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+      /* 25.6px */
+      letter-spacing: 0.64px;
+    }
+  }
+
+  .single_add_to_cart_button {
+    @extend .btn__primary;
+    background: #ebbeaf !important;
+    text-align: center;
+    display: flex;
+    color: #000 !important;
+    text-rendering: optimizeLegibility;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .reset_variations {
+    display: none !important;
+  }
+
+  .entry-summary {
+    .woocommerce-variation-add-to-cart {
+      display: flex;
+      align-items: center;
+      min-height: 46px;
+      margin-left: 8px;
+    }
+
+    .variations {
+      display: flex;
+      align-items: center;
+      margin-top: 12px;
+
+      .price {
+        font-family: 'Marvel', sans-serif;
+        font-size: 26px !important;
+      }
+
+      select {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 10px;
+        padding: 10px;
+        // font-family: $primary-text;
+        font-size: 14px;
+        border: 1px solid #000;
+        // background: $colorActiveMenu !important;
+        // border: none !important;
+        margin-left: 20px;
+      }
+    }
+
+    .single_add_to_cart_button {
+      @extend .btn__primary;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    h2 {
+      color: #000;
+      font-family: 'Iskry', sans-serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%;
+      /* 38.4px */
+      margin-top: 0px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #000;
+      font-family: 'Marvel', sans-serif;
+      font-size: 19.95px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      margin-bottom: 16px;
+    }
+  }
+}

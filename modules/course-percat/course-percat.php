@@ -10,13 +10,48 @@
     // Get categories from ACF field (returns term objects)
     $catfilters = get_sub_field('catfilters');
 
+    // Get initial category from ACF field (checkbox type with multiple: 0)
+    $initial_category_raw = get_sub_field('initial_category');
+    $initial_category = null;
+
+    // Debug: Log the raw value
+    error_log('CoursePerCat Debug: initial_category_raw = ' . print_r($initial_category_raw, true));
+
+    // Handle checkbox field with multiple: 0 (should behave like radio button)
+    if (!empty($initial_category_raw)) {
+      if (is_array($initial_category_raw)) {
+        // If it's an array, take the first selected category
+        $initial_category = $initial_category_raw[0];
+        error_log('CoursePerCat Debug: Found array, using first item: ' . $initial_category->slug);
+      } elseif (is_object($initial_category_raw)) {
+        // If it's a single object
+        $initial_category = $initial_category_raw;
+        error_log('CoursePerCat Debug: Found single object: ' . $initial_category->slug);
+      } elseif (is_numeric($initial_category_raw)) {
+        // If it's just an ID, get the term object
+        $initial_category = get_term($initial_category_raw, 'category');
+        if ($initial_category && !is_wp_error($initial_category)) {
+          error_log('CoursePerCat Debug: Found ID, converted to object: ' . $initial_category->slug);
+        } else {
+          error_log('CoursePerCat Debug: Invalid term ID: ' . $initial_category_raw);
+          $initial_category = null;
+        }
+      } else {
+        error_log('CoursePerCat Debug: Unexpected format: ' . gettype($initial_category_raw));
+      }
+    } else {
+      error_log('CoursePerCat Debug: No initial category selected');
+    }
+
     // Only show filters if catfilters has data
     if (!empty($catfilters)) {
       ?>
-      <div class="course-percat__filters">
+      <div class="course-percat__filters"
+        data-initial-category="<?php echo $initial_category ? esc_attr($initial_category->slug) : 'all'; ?>">
         <?php
         // Always show "Todos" button first
-        echo '<button class="course-percat__filter-btn active" data-category="all">';
+        $todos_active = empty($initial_category) ? 'active' : '';
+        echo '<button class="course-percat__filter-btn ' . $todos_active . '" data-category="all">';
         echo 'Todos';
         echo '</button>';
 
@@ -27,14 +62,15 @@
         if (!empty($categories)) {
           foreach ($categories as $category) {
             if (is_object($category) && isset($category->slug) && isset($category->name)) {
-              echo '<button class="course-percat__filter-btn" data-category="' . esc_attr($category->slug) . '">';
+              $category_active = ($initial_category && $initial_category->slug === $category->slug) ? 'active' : '';
+              echo '<button class="course-percat__filter-btn ' . $category_active . '" data-category="' . esc_attr($category->slug) . '">';
               echo esc_html($category->name);
               echo '</button>';
             }
           }
         }
 
-        // Debug: Print available filter categories
+        // Debug: Print available filter categories and initial category
         echo '<!-- Debug: Available filter categories: ';
         if (!empty($categories)) {
           foreach ($categories as $cat) {
@@ -44,6 +80,9 @@
           }
         }
         echo ' -->';
+
+        echo '<!-- Debug: Initial category raw: ' . print_r($initial_category_raw, true) . ' -->';
+        echo '<!-- Debug: Initial category processed: ' . ($initial_category ? $initial_category->slug . ' (' . $initial_category->name . ')' : 'none') . ' -->';
         ?>
       </div>
       <?php
@@ -128,6 +167,39 @@
             </a>
           </div>
           <div class="course-percat__item-title">
+            <div class="tag">
+              <?php
+              // Get post tags
+              $post_tags = get_the_tags();
+              $level_tags = array('principiante', 'avanzado', 'intermedio');
+              $found_level_tag = false;
+
+              if ($post_tags) {
+                foreach ($post_tags as $tag) {
+                  $tag_name = strtolower($tag->name);
+                  if (in_array($tag_name, $level_tags)) {
+                    echo '<span class="level-tag level-' . esc_attr($tag_name) . '">' . esc_html($tag->name) . '</span>';
+                    $found_level_tag = true;
+                    break; // Only show the first level tag found
+                  }
+                }
+              }
+
+              // Debug: Print all tags for this post
+              if ($post_tags) {
+                $tag_names = array();
+                foreach ($post_tags as $tag) {
+                  $tag_names[] = $tag->name;
+                }
+                echo '<!-- Debug: Post "' . get_the_title() . '" has tags: ' . implode(', ', $tag_names) . ' -->';
+                if (!$found_level_tag) {
+                  echo '<!-- Debug: No level tag found for post "' . get_the_title() . '" -->';
+                }
+              } else {
+                echo '<!-- Debug: Post "' . get_the_title() . '" has no tags -->';
+              }
+              ?>
+            </div>
             <h2><?php the_title(); ?></h2>
             <p>GL Music</p>
 
