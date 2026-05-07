@@ -313,6 +313,8 @@
   .woocommerce {
     display: flex;
     flex-flow: wrap;
+    align-items: flex-start;
+    gap: 24px 32px;
 
     &::after {
 
@@ -324,7 +326,9 @@
         left: 0;
         top: 0;
         display: block;
-        z-index: -1;
+        z-index: 0;
+        background: linear-gradient(180deg, rgba(229, 234, 254, 0.55) 0%, rgba(255, 255, 255, 0.96) 72%);
+        pointer-events: none;
       }
 
       @media only screen and (min-width: 1600px) {
@@ -618,10 +622,27 @@
     }
 
     &__user {
-      margin-bottom: 24px;
-      display: block;
-      font-size: 24px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
+    &__user-kicker {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #404354;
+    }
+
+    &__user-name {
+      font-family: 'iskry', serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1.2;
+      color: $color-gray;
     }
 
     .woocommerce-MyAccount-navigation {
@@ -653,6 +674,9 @@
         display: block;
         color: $color-gray;
         position: relative;
+        border-radius: 14px;
+        @include transition(0.2s);
+        box-shadow: 0 1px 0 rgba(56, 88, 233, 0.06);
 
         @include mobile {
           background: #e5eafeb1;
@@ -673,13 +697,14 @@
             position: absolute;
             right: -10px;
             top: 17px;
+            @include transition(0.2s);
           }
 
         }
 
         &:hover {
-          background-color: $color-primary;
-          color: white;
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.15) 100%);
+          color: $color-primary;
         }
       }
 
@@ -687,9 +712,10 @@
 
 
         a {
-          background-color: $color-primary;
+          background: $color-primary-gradient;
           color: white;
           font-weight: 700;
+          box-shadow: 0 8px 24px rgba(56, 88, 233, 0.28);
 
           &::before {
             background-color: $color-primary;
@@ -712,11 +738,272 @@
   .woocommerce-MyAccount-content {
     position: relative;
     z-index: 2;
+    flex: 1;
+    min-width: 0;
+    background: #fff;
+    border-radius: 24px;
+    padding: 24px 20px 32px;
+    border: 1px solid rgba(56, 88, 233, 0.1);
+    box-shadow: 0 12px 40px rgba(20, 15, 47, 0.06);
 
-    // @include tablet {
-    //   width: col(21, 29);
-    //   margin-left: col(1, 29);
-    // }
+    @include tablet {
+      padding: 32px 36px 40px;
+    }
+
+    > h2,
+    > h3 {
+      font-family: 'iskry', serif;
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 1.25;
+      color: $color-gray;
+      margin: 0 0 20px;
+    }
+
+    .account-dashboard {
+      margin: -4px 0 8px;
+
+      &__profile {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 18px;
+        align-items: center;
+        margin: 0 0 32px;
+        padding: 24px;
+        color: $color-white;
+        background:
+          linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.2)),
+          linear-gradient(105.9deg, #140f2f 24.4%, #0b0a10 80.5%);
+        border: 1px solid rgba($color-white, 0.12);
+        border-radius: 22px;
+        box-shadow: 0 18px 46px rgba(20, 15, 47, 0.18);
+
+        @include tablet {
+          grid-template-columns: auto minmax(0, 1fr) auto;
+          gap: 22px;
+          padding: 28px;
+        }
+      }
+
+      &__avatar {
+        width: 74px;
+        height: 74px;
+        overflow: hidden;
+        border: 2px solid rgba($color-white, 0.28);
+        border-radius: 50%;
+        background: rgba($color-white, 0.08);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__identity {
+        min-width: 0;
+      }
+
+      &__profile-name {
+        margin: 0 0 4px;
+        color: $color-white;
+        font-family: $font-primary;
+        font-size: 28px;
+        font-style: italic;
+        font-weight: 700;
+        line-height: 1.08;
+      }
+
+      &__profile-email {
+        margin: 0 0 14px;
+        color: rgba($color-white, 0.72);
+        font-size: 15px;
+        line-height: 1.4;
+        word-break: break-word;
+      }
+
+      &__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        span {
+          display: inline-flex;
+          align-items: center;
+          min-height: 30px;
+          padding: 7px 12px;
+          color: rgba($color-white, 0.86);
+          background: rgba($color-white, 0.08);
+          border: 1px solid rgba($color-white, 0.12);
+          border-radius: 999px;
+          font-size: 13px;
+          line-height: 1;
+        }
+      }
+
+      &__profile-actions {
+        display: flex;
+        grid-column: 1 / -1;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        @include tablet {
+          grid-column: auto;
+          align-items: flex-end;
+          flex-direction: column;
+        }
+      }
+
+      &__profile-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 12px 22px;
+        color: $color-white;
+        background: $color-primary-gradient;
+        border-radius: 32px;
+        box-shadow: 0 12px 26px rgba(102, 126, 234, 0.28);
+        font-size: 15px;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+        @include transition(0.2s);
+
+        &:hover {
+          color: $color-white;
+          filter: brightness(1.08);
+          transform: translateY(-1px);
+        }
+      }
+
+      &__profile-link {
+        color: rgba($color-white, 0.68);
+        font-size: 14px;
+        text-decoration: none;
+
+        &:hover {
+          color: #20dce6;
+        }
+      }
+
+      &__intro {
+        margin-bottom: 28px;
+      }
+
+      &__kicker {
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #404354;
+        margin: 0 0 8px;
+      }
+
+      &__title {
+        font-family: 'iskry', serif;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 1.2;
+        color: $color-gray;
+        margin: 0 0 12px;
+      }
+
+      &__session {
+        font-size: 14px;
+        line-height: 1.5;
+        color: rgba($color-gray, 0.85);
+        margin: 0 0 16px;
+
+        a {
+          color: $color-primary;
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+
+          &:hover {
+            color: $color-primary-hover;
+          }
+        }
+      }
+
+      &__desc {
+        font-size: 15px;
+        line-height: 1.65;
+        color: $color-gray;
+        margin: 0;
+        max-width: 42em;
+
+        a {
+          color: $color-primary;
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+
+          &:hover {
+            color: $color-primary-hover;
+          }
+        }
+      }
+
+      &__quick {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+
+        @include tablet {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+        }
+      }
+
+      &__card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 20px 20px 22px;
+        background: rgba(229, 234, 254, 0.45);
+        border: 1px solid rgba(56, 88, 233, 0.12);
+        border-radius: 18px;
+        text-decoration: none;
+        color: inherit;
+        overflow: hidden;
+        @include transition(0.25s);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, $color-primary 0%, $color-primary-hover 100%);
+          opacity: 0.85;
+        }
+
+        &:hover {
+          border-color: rgba(56, 88, 233, 0.35);
+          box-shadow: 0 10px 28px rgba(56, 88, 233, 0.12);
+          transform: translateY(-2px);
+        }
+      }
+
+      &__card-label {
+        font-weight: 700;
+        font-size: 17px;
+        color: $color-gray;
+      }
+
+      &__card-hint {
+        font-size: 13px;
+        line-height: 1.4;
+        color: rgba($color-gray, 0.72);
+      }
+    }
 
     .order-number,
     .order-date,
@@ -743,12 +1030,287 @@
         }
       }
     }
+
+    table.shop_table thead th {
+      background: rgba(229, 234, 254, 0.55);
+      font-size: 0.8125rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba($color-gray, 0.88);
+    }
   }
 
   @include tablet {
     margin-top: 130px;
   }
 
+}
+
+.user-zone {
+  .login-form {
+    position: relative;
+    left: 50%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
+    align-items: center;
+    width: 100vw;
+    min-height: calc(100vh - 121px);
+    margin-left: -50vw;
+    padding: 72px clamp(24px, 8vw, 132px);
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(11, 10, 16, 0.32) 0%, rgba(11, 10, 16, 0.72) 48%, rgba(11, 10, 16, 0.96) 100%),
+      linear-gradient(105.9deg, rgba(20, 15, 47, 0.82) 24.4%, rgba(11, 10, 16, 0.86) 80.5%),
+      url('../../login/img/1.jpg') center / cover no-repeat;
+    box-sizing: border-box;
+
+    &::before {
+      content: 'Accede a tu musica, cursos y librerias.';
+      display: block;
+      max-width: 430px;
+      color: rgba($color-white, 0.92);
+      font-family: $font-primary;
+      font-size: clamp(34px, 5vw, 64px);
+      font-style: italic;
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    &__image {
+      display: none !important;
+    }
+
+    &__form {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 430px;
+      margin-left: auto;
+      padding: 0;
+    }
+
+    &__title {
+      width: 104px;
+      height: 64px;
+      margin: 0 auto 24px;
+      overflow: hidden;
+      color: transparent;
+      font-size: 0;
+      background: url('http://glmusic.local/wp-content/uploads/2025/07/logo-white.svg') center / contain no-repeat;
+    }
+
+    h2 {
+      display: none;
+    }
+
+    .woocommerce-form-login,
+    .woocommerce-form-register,
+    form.login {
+      position: relative;
+      margin: 0 !important;
+      padding: 34px 36px 32px !important;
+      overflow: hidden;
+      background: rgba(16, 14, 26, 0.82) !important;
+      border: 1px solid rgba($color-white, 0.14) !important;
+      border-radius: 18px !important;
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba($color-white, 0.08) !important;
+      backdrop-filter: blur(18px);
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 4px;
+        background: $color-primary-gradient;
+      }
+    }
+
+    .woocommerce-form-login::after {
+      content: 'Ingresa con tu cuenta para continuar.';
+      display: block;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba($color-white, 0.1);
+      color: rgba($color-white, 0.56);
+      font-size: 14px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      color: rgba($color-white, 0.82) !important;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .required {
+      color: #20dce6;
+    }
+
+    input[type='text'],
+    input[type='password'],
+    input[type='email'],
+    .woocommerce-Input {
+      width: 100%;
+      min-height: 52px;
+      margin: 0 0 18px;
+      padding: 13px 16px !important;
+      color: $color-white !important;
+      font-family: $font-primary !important;
+      font-size: 17px !important;
+      font-weight: 400;
+      line-height: 1.2;
+      background: rgba($color-white, 0.07) !important;
+      border: 1px solid rgba($color-white, 0.16) !important;
+      border-radius: 10px !important;
+      box-shadow: none !important;
+      box-sizing: border-box;
+      outline: none !important;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+      &:focus {
+        background: rgba($color-white, 0.1) !important;
+        border-color: rgba(102, 126, 234, 0.86) !important;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.18) !important;
+      }
+    }
+
+    .show-password-input,
+    .woocommerce-page form .show-password-input {
+      top: 38px;
+      right: 14px;
+      color: rgba($color-white, 0.72);
+    }
+
+    .losttt,
+    .login .losttt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 0 0 18px;
+      color: rgba($color-white, 0.68);
+
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+
+    .woocommerce-form-login__rememberme {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 9px;
+      margin: 0 !important;
+      color: rgba($color-white, 0.68) !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0 !important;
+      line-height: 1.2;
+      text-transform: none !important;
+    }
+
+    input[type='checkbox'] {
+      width: 18px !important;
+      min-width: 18px;
+      height: 18px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      appearance: auto;
+      -webkit-appearance: auto;
+      accent-color: #20dce6;
+    }
+
+    .btn__primary,
+    .woocommerce-button,
+    button[type='submit'] {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 54px;
+      margin: 0;
+      padding: 15px 24px !important;
+      color: $color-white !important;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1;
+      background: $color-primary-gradient !important;
+      border: 0 !important;
+      border-radius: 32px !important;
+      box-shadow: 0 12px 28px rgba(102, 126, 234, 0.28) !important;
+      transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover,
+      &:focus {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+        box-shadow: 0 18px 36px rgba(102, 126, 234, 0.36) !important;
+      }
+    }
+
+    .btn__primary-link,
+    a {
+      color: rgba($color-white, 0.68);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #20dce6;
+      }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus {
+      border-color: rgba(102, 126, 234, 0.86);
+      -webkit-text-fill-color: $color-white;
+      -webkit-box-shadow: 0 0 0 1000px #1a1824 inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .login-form {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      min-height: auto;
+      padding: 56px 18px 64px;
+      background:
+        linear-gradient(180deg, rgba(20, 15, 47, 0.84) 0%, rgba(11, 10, 16, 0.94) 100%),
+        url('../../login/img/1.jpg') center / cover no-repeat;
+
+      &::before {
+        display: none;
+      }
+
+      &__form {
+        max-width: 430px;
+        margin: 0 auto;
+      }
+
+      .woocommerce-form-login,
+      .woocommerce-form-register,
+      form.login {
+        padding: 28px 22px 24px !important;
+      }
+
+      .losttt,
+      .login .losttt {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  }
 }
 
 

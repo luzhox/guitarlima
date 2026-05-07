@@ -9,6 +9,9 @@
   require('lib/helpers.php');
   require('inc/etc.php');
   require('inc/favorites.php');
+  require('inc/admin-style.php'); // GL Music Admin UI Futurista
+  require('inc/woocommerce-account.php');
+  require('inc/plan-pro-checkout.php');
 
     // Custom AJAX login handler
   add_action('wp_ajax_nopriv_custom_login', 'handle_custom_login');
@@ -34,7 +37,7 @@
             } else {
                 $response['success'] = true;
                 $response['message'] = 'Login exitoso';
-                $response['redirect'] = home_url();
+                $response['redirect'] = home_url('/mi-cuenta/');
             }
         }
 
@@ -87,12 +90,50 @@
 
                     $response['success'] = true;
                     $response['message'] = 'Cuenta creada exitosamente';
-                    $response['redirect'] = home_url();
+                    $response['redirect'] = home_url('/mi-cuenta/');
                 }
             }
         }
 
         wp_send_json($response);
     }
+  }
+
+  add_filter('get_avatar_data', 'guitarlima_user_profile_avatar_data', 20, 2);
+
+  function guitarlima_user_profile_avatar_data($args, $id_or_email) {
+    $user_id = 0;
+
+    if (is_numeric($id_or_email)) {
+        $user_id = (int) $id_or_email;
+    } elseif ($id_or_email instanceof WP_User) {
+        $user_id = (int) $id_or_email->ID;
+    } elseif ($id_or_email instanceof WP_Comment) {
+        $user_id = (int) $id_or_email->user_id;
+    } elseif ($id_or_email instanceof WP_Post) {
+        $user_id = (int) $id_or_email->post_author;
+    }
+
+    if (!$user_id) {
+        return $args;
+    }
+
+    $avatar_id = (int) get_user_meta($user_id, 'gl_profile_avatar_id', true);
+
+    if (!$avatar_id) {
+        return $args;
+    }
+
+    $size = isset($args['size']) ? (int) $args['size'] : 96;
+    $image = wp_get_attachment_image_src($avatar_id, [$size, $size]);
+
+    if (!$image) {
+        return $args;
+    }
+
+    $args['url'] = $image[0];
+    $args['found_avatar'] = true;
+
+    return $args;
   }
   ?>

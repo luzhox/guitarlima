@@ -1,0 +1,477 @@
+/* GL Music — wp-login.php */
+
+@font-face {
+  font-family: "Futura PT";
+  src:
+    url("../fonts/futura_pt_book-webfont.woff2") format("woff2"),
+    url("../fonts/futura_pt_book-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futura PT";
+  src:
+    url("../fonts/futura-italic2.woff2") format("woff2"),
+    url("../fonts/futura-italic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+
+:root {
+  --gl-dark: #0b0a10;
+  --gl-purple: #140f2f;
+  --gl-blue: #3858e9;
+  --gl-blue-hot: #667eea;
+  --gl-violet: #764ba2;
+  --gl-cyan: #20dce6;
+  --gl-white: #ffffff;
+  --gl-muted: rgba(255, 255, 255, .68);
+  --gl-line: rgba(255, 255, 255, .14);
+  --gl-card: rgba(16, 14, 26, .82);
+  --gl-font: "Futura PT", Arial, Helvetica, sans-serif;
+}
+
+html,
+body.login {
+  min-height: 100%;
+  background: var(--gl-dark) !important;
+}
+
+body.login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 48px clamp(24px, 8vw, 132px);
+  overflow-x: hidden;
+  color: var(--gl-white);
+  font-family: var(--gl-font);
+  box-sizing: border-box;
+}
+
+body.login::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(11, 10, 16, .32) 0%, rgba(11, 10, 16, .72) 48%, rgba(11, 10, 16, .96) 100%),
+    linear-gradient(105.9deg, rgba(20, 15, 47, .82) 24.4%, rgba(11, 10, 16, .86) 80.5%),
+    url("../login/img/1.jpg") center / cover no-repeat;
+}
+
+body.login::after {
+  content: "Accede a tu musica, cursos y librerias.";
+  position: fixed;
+  left: clamp(24px, 7vw, 112px);
+  bottom: clamp(32px, 9vh, 92px);
+  z-index: 1;
+  max-width: 420px;
+  color: rgba(255, 255, 255, .84);
+  font-family: var(--gl-font);
+  font-size: clamp(28px, 4vw, 58px);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: 0;
+  pointer-events: none;
+}
+
+#login {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 430px) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#login h1 {
+  margin: 0 0 26px;
+}
+
+#login h1 a,
+.login h1 a {
+  display: block;
+  width: 222px;
+  height: 58px;
+  margin: 0 auto;
+  background-image: url("/wp-content/uploads/2025/07/logo-white.svg") !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: none;
+  opacity: .98;
+  text-indent: -9999px;
+}
+
+#loginform,
+#lostpasswordform,
+#registerform,
+.login form {
+  position: relative;
+  margin: 0 !important;
+  padding: 34px 36px 32px !important;
+  overflow: hidden;
+  background: var(--gl-card) !important;
+  border: 1px solid var(--gl-line) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, .48),
+    inset 0 1px 0 rgba(255, 255, 255, .08) !important;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+#loginform::before,
+#lostpasswordform::before,
+#registerform::before,
+.login form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(135deg, var(--gl-blue-hot), var(--gl-violet));
+}
+
+.login label,
+.login form label,
+.login label[for] {
+  display: block;
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, .82) !important;
+  font-family: var(--gl-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.login form .input,
+.login input[type="text"],
+.login input[type="password"],
+.login input[type="email"] {
+  width: 100%;
+  min-height: 52px;
+  margin: 0 0 18px;
+  padding: 13px 16px !important;
+  color: var(--gl-white) !important;
+  font-family: var(--gl-font) !important;
+  font-size: 17px !important;
+  font-weight: 400;
+  line-height: 1.2;
+  background: rgba(255, 255, 255, .07) !important;
+  border: 1px solid rgba(255, 255, 255, .16) !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+  outline: none !important;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.login form .input:focus,
+.login input[type="text"]:focus,
+.login input[type="password"]:focus,
+.login input[type="email"]:focus {
+  background: rgba(255, 255, 255, .1) !important;
+  border-color: rgba(102, 126, 234, .86) !important;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, .18) !important;
+}
+
+.login form .input::placeholder {
+  color: rgba(255, 255, 255, .42);
+}
+
+.login .user-pass-wrap {
+  position: relative;
+}
+
+.login .button.wp-hide-pw {
+  top: 4px !important;
+  right: 6px !important;
+  min-width: 42px;
+  height: 42px !important;
+  color: var(--gl-muted) !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.login .button.wp-hide-pw:hover,
+.login .button.wp-hide-pw:focus {
+  color: var(--gl-cyan) !important;
+  box-shadow: none !important;
+}
+
+.login .forgetmenot {
+  float: none !important;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  margin: 0 0 18px !important;
+}
+
+.login .forgetmenot label {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  margin: 0 !important;
+  color: var(--gl-muted) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2;
+  text-transform: none !important;
+}
+
+.login input[type="checkbox"] {
+  width: 18px !important;
+  min-width: 18px;
+  height: 18px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(255, 255, 255, .24) !important;
+  border-radius: 5px !important;
+  background: rgba(255, 255, 255, .08) !important;
+  box-shadow: none !important;
+}
+
+.login input[type="checkbox"]:checked::before {
+  width: 20px;
+  height: 20px;
+  margin: -2px 0 0 -2px;
+  color: var(--gl-cyan);
+}
+
+.login .submit {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.login .button-primary,
+.login input[type="submit"],
+.login form .button-primary {
+  float: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-height: 54px !important;
+  margin: 0 !important;
+  padding: 15px 24px !important;
+  color: var(--gl-white) !important;
+  font-family: var(--gl-font) !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+  background: linear-gradient(135deg, var(--gl-blue-hot), var(--gl-violet)) !important;
+  border: 0 !important;
+  border-radius: 32px !important;
+  box-shadow: 0 12px 28px rgba(102, 126, 234, .28) !important;
+  cursor: pointer;
+  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.login .button-primary:hover,
+.login .button-primary:focus,
+.login input[type="submit"]:hover,
+.login input[type="submit"]:focus {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 36px rgba(102, 126, 234, .36) !important;
+}
+
+.login #nav,
+.login #backtoblog {
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+  text-align: center;
+}
+
+.login #backtoblog {
+  margin-top: 10px !important;
+}
+
+.login #nav a,
+.login #backtoblog a,
+.login .privacy-policy-page-link a,
+.login p a {
+  color: var(--gl-muted) !important;
+  font-family: var(--gl-font);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none !important;
+  transition: color .2s ease;
+}
+
+.login #nav a:hover,
+.login #backtoblog a:hover,
+.login .privacy-policy-page-link a:hover,
+.login p a:hover {
+  color: var(--gl-cyan) !important;
+}
+
+#login_error,
+.login .message,
+.login .success,
+.login .notice {
+  margin: 0 0 18px !important;
+  padding: 14px 16px !important;
+  color: rgba(255, 255, 255, .86) !important;
+  font-family: var(--gl-font);
+  font-size: 14px;
+  line-height: 1.45;
+  background: rgba(16, 14, 26, .82) !important;
+  border: 1px solid rgba(255, 255, 255, .14) !important;
+  border-left: 4px solid var(--gl-blue-hot) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .28) !important;
+}
+
+#login_error {
+  border-left-color: #ff6b7d !important;
+}
+
+.login .success {
+  border-left-color: var(--gl-cyan) !important;
+}
+
+#login_error a,
+.login .message a,
+.login .notice a {
+  color: var(--gl-cyan) !important;
+}
+
+#login-language-switcher,
+.language-switcher {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 430px) !important;
+  margin: 18px 0 0 !important;
+  padding: 14px !important;
+  color: var(--gl-muted);
+  background: rgba(16, 14, 26, .72) !important;
+  border: 1px solid var(--gl-line) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .26) !important;
+  box-sizing: border-box;
+}
+
+#login-language-switcher form,
+.language-switcher form {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#login-language-switcher form::before,
+.language-switcher form::before {
+  display: none;
+}
+
+#wp_lang,
+#login-language-switcher select,
+.language-switcher select {
+  flex: 1;
+  min-height: 42px;
+  color: var(--gl-white) !important;
+  font-family: var(--gl-font);
+  background: rgba(255, 255, 255, .08) !important;
+  border: 1px solid rgba(255, 255, 255, .15) !important;
+  border-radius: 10px !important;
+}
+
+#login-language-switcher .button,
+#login-language-switcher input[type="submit"],
+.language-switcher .button,
+.language-switcher input[type="submit"] {
+  width: auto !important;
+  min-height: 42px !important;
+  padding: 11px 16px !important;
+  font-size: 14px !important;
+  border-radius: 24px !important;
+}
+
+.privacy-policy-page-link {
+  position: relative;
+  z-index: 2;
+  margin: 18px 0 0 !important;
+  color: var(--gl-muted) !important;
+  text-align: center;
+}
+
+.login .dashicons {
+  font-family: dashicons;
+}
+
+@media screen and (max-width: 900px) {
+  body.login {
+    justify-content: center;
+    align-items: center;
+    padding: 32px 20px;
+  }
+
+  body.login::before {
+    background:
+      linear-gradient(180deg, rgba(20, 15, 47, .84) 0%, rgba(11, 10, 16, .94) 100%),
+      url("../login/img/1.jpg") center / cover no-repeat;
+  }
+
+  body.login::after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body.login {
+    align-items: stretch;
+    padding: 24px 18px;
+  }
+
+  #login {
+    width: 100% !important;
+  }
+
+  #login h1 a,
+  .login h1 a {
+    width: 190px;
+    height: 50px;
+  }
+
+  #loginform,
+  #lostpasswordform,
+  #registerform,
+  .login form {
+    padding: 28px 22px 24px !important;
+    border-radius: 16px !important;
+  }
+
+  #login-language-switcher,
+  .language-switcher {
+    width: 100% !important;
+  }
+
+  #login-language-switcher form,
+  .language-switcher form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #login-language-switcher .button,
+  #login-language-switcher input[type="submit"],
+  .language-switcher .button,
+  .language-switcher input[type="submit"] {
+    width: 100% !important;
+  }
+}

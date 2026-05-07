@@ -111,6 +111,7 @@ $(document).ready(function () {
     $('#masthead').toggleClass('active')
     $('.site-header-sandwich').toggleClass('active')
     $('.site-header-nav').toggleClass('active')
+    $('body').toggleClass('gl-menu-open', $('.site-header-nav').hasClass('active'))
   })
 
   $('.input-field').focusin(function (e) {

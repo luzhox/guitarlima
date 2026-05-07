@@ -1,0 +1,1745 @@
+// ═══════════════════════════════════════════════════════
+//   GL MUSIC — Admin UI Futurista
+//   Paleta: #0a0b12 (void) · #00aeff (neon blue) · #FFC600 (gold)
+// ═══════════════════════════════════════════════════════
+
+// ── Variables ────────────────────────────────────────────
+$gl-void: #0a0b12;
+$gl-deep: #0f1020;
+$gl-surface: #161828;
+$gl-card: #1c1f35;
+$gl-card2: #222640;
+$gl-border: rgba(255, 255, 255, .06);
+$gl-border2: rgba(0, 174, 255, .15);
+
+$gl-blue: #00aeff;
+$gl-blue2: #0085cc;
+$gl-blue3: #004d85;
+$gl-gold: #FFC600;
+$gl-gold2: #cc9e00;
+$gl-green: #00e676;
+$gl-red: #ff4b6e;
+$gl-purple: #a259ff;
+
+$gl-text: #d8ddf0;
+$gl-text2: #9198b8;
+$gl-muted: #5a6080;
+
+$gl-radius: 10px;
+$gl-radius-s: 6px;
+$gl-radius-xs: 4px;
+$gl-shadow: 0 8px 32px rgba(0, 0, 0, .55);
+$gl-glow-blue: 0 0 20px rgba(0, 174, 255, .25);
+$gl-glow-gold: 0 0 20px rgba(255, 198, 0, .2);
+$gl-tr: .2s cubic-bezier(.4, 0, .2, 1);
+
+$gl-font: -apple-system, 'Segoe UI', BlinkMacSystemFont, 'Inter', sans-serif;
+
+// ── Mixins ───────────────────────────────────────────────
+@mixin gl-input-base {
+  background: $gl-surface !important;
+  border: 1px solid rgba(255, 255, 255, .1) !important;
+  border-radius: $gl-radius-s !important;
+  color: $gl-text !important;
+  font-family: $gl-font !important;
+  padding: 8px 12px !important;
+  transition: border-color $gl-tr, box-shadow $gl-tr !important;
+}
+
+@mixin gl-input-focus {
+  border-color: $gl-blue !important;
+  box-shadow: 0 0 0 2px rgba(0, 174, 255, .15) !important;
+  outline: none !important;
+  background: rgba(22, 24, 40, .95) !important;
+}
+
+@mixin gl-btn-primary {
+  background: linear-gradient(135deg, $gl-blue, $gl-blue2) !important;
+  border: none !important;
+  border-radius: $gl-radius-s !important;
+  color: #fff !important;
+  font-family: $gl-font !important;
+  font-size: .82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+  padding: 8px 22px !important;
+  text-shadow: none !important;
+  box-shadow: 0 4px 16px rgba(0, 174, 255, .35) !important;
+  transition: all $gl-tr !important;
+}
+
+@mixin gl-card-accent-top {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, $gl-blue, $gl-gold);
+  opacity: .5;
+}
+
+// ── CSS Custom Properties (compatibilidad runtime) ──
+:root {
+  --gl-void: #{$gl-void};
+  --gl-deep: #{$gl-deep};
+  --gl-surface: #{$gl-surface};
+  --gl-card: #{$gl-card};
+  --gl-card2: #{$gl-card2};
+  --gl-border: #{$gl-border};
+  --gl-border2: #{$gl-border2};
+
+  --gl-blue: #{$gl-blue};
+  --gl-blue2: #{$gl-blue2};
+  --gl-blue3: #{$gl-blue3};
+  --gl-gold: #{$gl-gold};
+  --gl-gold2: #{$gl-gold2};
+  --gl-green: #{$gl-green};
+  --gl-red: #{$gl-red};
+  --gl-purple: #{$gl-purple};
+
+  --gl-text: #{$gl-text};
+  --gl-text2: #{$gl-text2};
+  --gl-muted: #{$gl-muted};
+
+  --gl-radius: #{$gl-radius};
+  --gl-radius-s: #{$gl-radius-s};
+  --gl-radius-xs: #{$gl-radius-xs};
+  --gl-shadow: #{$gl-shadow};
+  --gl-glow-blue: #{$gl-glow-blue};
+  --gl-glow-gold: #{$gl-glow-gold};
+  --gl-tr: #{$gl-tr};
+
+  --gl-font: #{$gl-font};
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   FONDO GLOBAL
+// ══════════════════════════════════════════════════════════
+html,
+body.wp-admin,
+body.gl-admin {
+  background-color: $gl-void !important;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 174, 255, .06), transparent),
+    linear-gradient(180deg, $gl-deep 0%, $gl-void 100%) !important;
+  color: $gl-text !important;
+  font-family: $gl-font !important;
+
+  #wpcontent,
+  #wpbody,
+  #wpbody-content,
+  .wrap {
+    background-color: $gl-void !important;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 174, 255, .06), transparent),
+      linear-gradient(180deg, $gl-deep 0%, $gl-void 100%) !important;
+    color: $gl-text !important;
+    font-family: $gl-font !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   ADMIN BAR
+// ══════════════════════════════════════════════════════════
+#wpadminbar {
+  background: rgba(10, 11, 18, .96) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(0, 174, 255, .12) !important;
+  box-shadow: 0 1px 0 rgba(0, 174, 255, .08), 0 4px 24px rgba(0, 0, 0, .6) !important;
+
+  .ab-top-menu>li {
+
+    >.ab-item,
+    .ab-icon {
+      color: $gl-text2 !important;
+      font-size: .8rem !important;
+      letter-spacing: .02em !important;
+    }
+
+    &:hover,
+    &.hover {
+      background: transparent !important;
+
+      >.ab-item {
+        background: rgba(0, 174, 255, .1) !important;
+        color: $gl-blue !important;
+      }
+    }
+  }
+
+  .quicklinks .ab-top-menu>li>.ab-item {
+    color: $gl-text2 !important;
+    font-size: .8rem !important;
+    letter-spacing: .02em !important;
+  }
+
+  .ab-sub-wrapper {
+    background: rgba(22, 24, 40, .98) !important;
+    border: 1px solid $gl-border2 !important;
+    border-radius: 0 0 $gl-radius $gl-radius !important;
+    box-shadow: $gl-shadow !important;
+    backdrop-filter: blur(16px) !important;
+  }
+
+  .menupop .ab-sub-wrapper .ab-item {
+    color: $gl-text2 !important;
+
+    &:hover {
+      color: $gl-blue !important;
+      background: rgba(0, 174, 255, .08) !important;
+    }
+  }
+
+  #wp-admin-bar-site-name {
+    .ab-item {
+      color: $gl-gold !important;
+      font-weight: 700 !important;
+    }
+
+    &:hover .ab-item {
+      color: #fff !important;
+    }
+  }
+
+  #wp-admin-bar-my-account .ab-item {
+    color: $gl-text2 !important;
+  }
+
+  .avatar {
+    border-radius: 50% !important;
+    border: 2px solid $gl-blue !important;
+    box-shadow: $gl-glow-blue !important;
+  }
+
+  #wp-admin-bar-search .ab-item,
+  #wp-admin-bar-top-secondary .ab-item {
+    color: $gl-muted !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   MENÚ LATERAL
+// ══════════════════════════════════════════════════════════
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu {
+  background: $gl-deep !important;
+  border-right: 1px solid rgba(0, 174, 255, .08) !important;
+}
+
+#adminmenu {
+  &::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: linear-gradient(90deg, $gl-blue, $gl-gold);
+    opacity: .6;
+    margin-bottom: 4px;
+  }
+
+  .wp-menu-arrow {
+    background: $gl-deep !important;
+  }
+
+  a,
+  li.menu-top,
+  .wp-submenu a,
+  .wp-submenu li a {
+    color: $gl-text2 !important;
+    font-size: .82rem !important;
+    font-family: $gl-font !important;
+    letter-spacing: .01em !important;
+  }
+
+  li.menu-top:hover {
+
+    >a,
+    .wp-menu-name {
+      color: #fff !important;
+      background: rgba(0, 174, 255, .08) !important;
+    }
+  }
+
+  a:hover {
+    color: #fff !important;
+    background: rgba(0, 174, 255, .08) !important;
+  }
+
+  li.current>a.menu-top,
+  li.wp-has-current-submenu>a.wp-has-current-submenu {
+    color: $gl-blue !important;
+    background: rgba(0, 174, 255, .12) !important;
+    box-shadow: inset 3px 0 0 $gl-blue !important;
+    font-weight: 700 !important;
+  }
+
+  .current .wp-menu-name,
+  li.current .wp-menu-name {
+    color: $gl-blue !important;
+    background: rgba(0, 174, 255, .12) !important;
+    font-weight: 700 !important;
+  }
+
+  li.wp-menu-separator,
+  .separator {
+    background: transparent !important;
+    border-top: 1px solid $gl-border !important;
+    margin: 6px 12px !important;
+    height: 0 !important;
+  }
+
+  .menu-icon-generic div.wp-menu-image::before,
+  .dashicons-before::before {
+    color: $gl-muted !important;
+  }
+
+  li {
+
+    &:hover .dashicons-before::before,
+    &.current .dashicons-before::before,
+    &.wp-has-current-submenu .dashicons-before::before {
+      color: $gl-blue !important;
+    }
+  }
+
+  .awaiting-mod,
+  .update-plugins {
+    background: $gl-blue !important;
+    color: #fff !important;
+    font-size: .65rem !important;
+    font-weight: 800 !important;
+    border-radius: 100px !important;
+    box-shadow: 0 0 10px rgba(0, 174, 255, .5) !important;
+  }
+
+  .wp-submenu {
+    background: rgba(22, 24, 40, .98) !important;
+    border: 1px solid $gl-border2 !important;
+    border-radius: $gl-radius !important;
+    box-shadow: $gl-shadow !important;
+
+    a:hover {
+      color: $gl-blue !important;
+      background: rgba(0, 174, 255, .07) !important;
+    }
+
+    .current a {
+      color: $gl-blue !important;
+      font-weight: 700 !important;
+    }
+  }
+}
+
+#collapse-button {
+  color: $gl-muted !important;
+
+  &:hover,
+  &:focus {
+    color: $gl-blue !important;
+  }
+
+  .collapse-button-icon {
+    background: $gl-card !important;
+    border: 1px solid $gl-border2 !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   CONTENIDO PRINCIPAL
+// ══════════════════════════════════════════════════════════
+.wp-admin,
+.gl-admin {
+  h1 {
+    color: $gl-text !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    letter-spacing: -.01em !important;
+  }
+
+  h2 {
+    color: $gl-text !important;
+    font-weight: 700 !important;
+  }
+
+  h1.wp-heading-inline {
+    color: $gl-text !important;
+  }
+
+  .description {
+    color: $gl-text2 !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   POSTBOXES / METABOXES
+// ══════════════════════════════════════════════════════════
+#post-body,
+.postbox-container,
+.postbox {
+  background: $gl-card !important;
+  border: 1px solid $gl-border !important;
+  border-radius: $gl-radius !important;
+  box-shadow: none !important;
+  color: $gl-text !important;
+}
+
+.postbox {
+
+  .hndle,
+  .handlediv {
+    border-bottom: 1px solid $gl-border !important;
+    background: transparent !important;
+    color: $gl-text !important;
+  }
+
+  h2,
+  h3 {
+    color: $gl-text !important;
+    font-size: .9rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .03em !important;
+    text-transform: uppercase !important;
+  }
+
+  .handlediv .toggle-indicator::before {
+    color: $gl-muted !important;
+  }
+}
+
+#titlediv,
+#titlewrap {
+  background: transparent !important;
+  border: none !important;
+}
+
+#title {
+  background: $gl-card !important;
+  border: 1px solid $gl-border !important;
+  border-radius: $gl-radius-s !important;
+  color: $gl-text !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: border-color $gl-tr, box-shadow $gl-tr !important;
+
+  &:focus {
+    border-color: $gl-blue !important;
+    box-shadow: 0 0 0 2px rgba(0, 174, 255, .15) !important;
+    outline: none !important;
+  }
+
+  &::placeholder {
+    color: $gl-muted !important;
+  }
+}
+
+#edit-slug-box {
+  color: $gl-text2 !important;
+  font-size: .8rem !important;
+
+  a {
+    color: $gl-blue !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   FORM TABLES
+// ══════════════════════════════════════════════════════════
+.form-table {
+  th {
+    color: $gl-text !important;
+    font-size: .82rem !important;
+    font-weight: 600 !important;
+  }
+
+  td {
+    color: $gl-text2 !important;
+
+    p.description {
+      color: $gl-muted !important;
+      font-size: .78rem !important;
+    }
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   INPUTS, SELECTS, TEXTAREAS
+// ══════════════════════════════════════════════════════════
+.gl-admin,
+body.wp-admin {
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  textarea,
+  select {
+    @include gl-input-base;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus,
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="number"]:focus {
+    @include gl-input-focus;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: $gl-muted !important;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: $gl-blue !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   BOTONES
+// ══════════════════════════════════════════════════════════
+body.wp-admin {
+
+  .button,
+  .button-secondary {
+    background: $gl-card2 !important;
+    border: 1px solid rgba(255, 255, 255, .12) !important;
+    border-radius: $gl-radius-s !important;
+    color: $gl-text2 !important;
+    font-family: $gl-font !important;
+    font-size: .82rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .02em !important;
+    padding: 7px 18px !important;
+    text-shadow: none !important;
+    transition: all $gl-tr !important;
+    cursor: pointer !important;
+
+    &:hover {
+      background: $gl-surface !important;
+      border-color: rgba(0, 174, 255, .3) !important;
+      color: $gl-text !important;
+      box-shadow: 0 0 12px rgba(0, 174, 255, .1) !important;
+    }
+  }
+
+  .button-primary,
+  input[type="submit"].button-primary {
+    @include gl-btn-primary;
+
+    &:hover {
+      filter: brightness(1.15) !important;
+      box-shadow: 0 6px 24px rgba(0, 174, 255, .5) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    &:active {
+      transform: translateY(0) !important;
+    }
+  }
+
+  .submitdelete,
+  a.delete,
+  a.submitdelete {
+    color: $gl-red !important;
+    text-decoration: none !important;
+    font-size: .78rem !important;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   WP LIST TABLE
+// ══════════════════════════════════════════════════════════
+table.wp-list-table {
+  background: transparent !important;
+  border: none !important;
+  border-radius: $gl-radius !important;
+  overflow: hidden !important;
+}
+
+.wp-list-table {
+
+  thead tr,
+  tfoot tr {
+    background: $gl-card !important;
+    border-bottom: 1px solid $gl-border2 !important;
+  }
+
+  thead th,
+  thead td,
+  tfoot th {
+    color: $gl-text2 !important;
+    font-size: .68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .1em !important;
+    text-transform: uppercase !important;
+    border-bottom: 2px solid rgba(0, 174, 255, .2) !important;
+    padding: 8px 10px !important;
+    white-space: nowrap !important;
+  }
+
+  thead th a,
+  tfoot th a {
+    color: $gl-text2 !important;
+  }
+
+  thead th.sorted a,
+  thead th.sorted a:hover {
+    color: $gl-blue !important;
+  }
+
+  tbody tr {
+    background: $gl-surface !important;
+    border-bottom: 1px solid $gl-border !important;
+    transition: background $gl-tr !important;
+
+    &:last-child {
+      border-bottom: none !important;
+    }
+
+    &:hover td {
+      background: rgba(0, 174, 255, .04) !important;
+    }
+
+    &.alternate {
+      background: $gl-card !important;
+
+      &:hover td {
+        background: rgba(0, 174, 255, .06) !important;
+      }
+    }
+  }
+
+  td,
+  th.check-column {
+    color: $gl-text2 !important;
+    padding: 7px 10px !important;
+    font-size: .82rem !important;
+    vertical-align: middle !important;
+    border: none !important;
+    line-height: 1.4 !important;
+  }
+
+  .row-title,
+  strong a.row-title {
+    color: $gl-text !important;
+    font-weight: 600 !important;
+    font-size: .84rem !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: $gl-blue !important;
+    }
+  }
+
+  // Row actions: ocultos por defecto, visibles al hacer hover en la fila
+  .row-actions {
+    color: $gl-muted !important;
+    font-size: .72rem !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition: opacity .15s !important;
+
+    a {
+      color: $gl-text2 !important;
+
+      &:hover {
+        color: $gl-blue !important;
+      }
+    }
+
+    .trash a:hover,
+    .delete a:hover {
+      color: $gl-red !important;
+    }
+
+    span.sep {
+      color: $gl-border !important;
+    }
+  }
+
+  tbody tr:hover .row-actions {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .column-date {
+    color: $gl-muted !important;
+    font-size: .78rem !important;
+  }
+
+  .column-role {
+    color: $gl-text2 !important;
+    font-size: .75rem !important;
+    text-transform: capitalize !important;
+  }
+
+  .post-state {
+    color: $gl-muted !important;
+    font-size: .75rem !important;
+  }
+
+  .check-column input[type="checkbox"],
+  thead th.check-column input[type="checkbox"] {
+    accent-color: $gl-blue !important;
+  }
+
+  .column-username .avatar {
+    border-radius: 50% !important;
+    border: 2px solid $gl-border2 !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   TABLENAV
+// ══════════════════════════════════════════════════════════
+.tablenav {
+  background: transparent !important;
+  margin: 4px 0 !important;
+
+  .tablenav-pages {
+    color: $gl-muted !important;
+
+    a {
+      background: $gl-card !important;
+      border: 1px solid $gl-border !important;
+      color: $gl-text2 !important;
+      border-radius: $gl-radius-xs !important;
+      padding: 4px 8px !important;
+
+      &:hover {
+        border-color: $gl-blue !important;
+        color: $gl-blue !important;
+      }
+    }
+  }
+
+  .current-page {
+    background: $gl-card2 !important;
+    border: 1px solid rgba(0, 174, 255, .2) !important;
+    color: $gl-text !important;
+    border-radius: $gl-radius-xs !important;
+    padding: 4px 8px !important;
+    width: 50px !important;
+    text-align: center !important;
+  }
+
+  select {
+    background: $gl-card !important;
+    border: 1px solid $gl-border !important;
+    border-radius: $gl-radius-xs !important;
+    color: $gl-text2 !important;
+    padding: 5px 8px !important;
+  }
+
+  .displaying-num {
+    color: $gl-muted !important;
+    font-size: .78rem !important;
+  }
+}
+
+ul.subsubsub {
+  background: transparent !important;
+  color: $gl-muted !important;
+  font-size: .78rem !important;
+
+  a {
+    color: $gl-muted !important;
+  }
+
+  a.current {
+    color: $gl-blue !important;
+    font-weight: 700 !important;
+  }
+
+  li {
+    border: none !important;
+  }
+}
+
+// Buscador — aplica tanto a entradas (#posts-filter) como a páginas (#pages-filter)
+#posts-filter,
+#pages-filter {
+  .search-box {
+    input[type="search"] {
+      background: $gl-card !important;
+      border: 1px solid $gl-border !important;
+      border-radius: $gl-radius-s 0 0 $gl-radius-s !important;
+      color: $gl-text !important;
+      padding: 7px 12px !important;
+    }
+
+    input[type="submit"] {
+      background: $gl-card2 !important;
+      border: 1px solid $gl-border !important;
+      border-left: none !important;
+      border-radius: 0 $gl-radius-s $gl-radius-s 0 !important;
+      color: $gl-text2 !important;
+      padding: 7px 14px !important;
+    }
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   NOTICES / ALERTAS
+// ══════════════════════════════════════════════════════════
+.notice,
+div.updated,
+div.error,
+div.notice-success,
+div.notice-warning,
+div.notice-error,
+div.notice-info {
+  background: $gl-card !important;
+  border: none !important;
+  border-radius: $gl-radius !important;
+  color: $gl-text !important;
+  box-shadow: none !important;
+  padding: 12px 16px 12px 18px !important;
+  margin: 6px 0 !important;
+  font-size: .83rem !important;
+}
+
+.notice-success,
+div.updated {
+  border-left: 3px solid $gl-green !important;
+  background: rgba(0, 230, 118, .06) !important;
+}
+
+.notice-error,
+div.error {
+  border-left: 3px solid $gl-red !important;
+  background: rgba(255, 75, 110, .06) !important;
+}
+
+.notice-warning {
+  border-left: 3px solid $gl-gold !important;
+  background: rgba(255, 198, 0, .06) !important;
+}
+
+.notice-info {
+  border-left: 3px solid $gl-blue !important;
+  background: rgba(0, 174, 255, .06) !important;
+}
+
+.notice-dismiss {
+  &::before {
+    color: $gl-muted !important;
+  }
+
+  &:hover::before {
+    color: $gl-text !important;
+  }
+}
+
+.update-nag {
+  background: rgba(255, 198, 0, .08) !important;
+  border: 1px solid rgba(255, 198, 0, .2) !important;
+  border-radius: $gl-radius !important;
+  color: $gl-gold !important;
+  font-size: .8rem !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   DASHBOARD — Widgets
+// ══════════════════════════════════════════════════════════
+#dashboard-widgets {
+
+  .postbox,
+  .dashboard-widget-control-form {
+    background: $gl-card !important;
+    border: 1px solid $gl-border !important;
+    border-radius: $gl-radius !important;
+    color: $gl-text !important;
+    overflow: hidden !important;
+    position: relative !important;
+
+    &::before {
+      @include gl-card-accent-top;
+    }
+
+    h2 {
+      border-bottom: 1px solid $gl-border !important;
+      font-size: .8rem !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: .08em !important;
+      color: $gl-text2 !important;
+      padding: 12px 14px !important;
+    }
+  }
+}
+
+#dashboard-quick-press {
+
+  .input-text-wrap input[type="text"],
+  textarea {
+    background: $gl-surface !important;
+    border-color: $gl-border !important;
+    color: $gl-text !important;
+  }
+}
+
+#dashboard_right_now {
+
+  .sub,
+  .main {
+    background: transparent !important;
+  }
+
+  li a {
+    color: $gl-blue !important;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+}
+
+#dashboard_activity .subsubsub a {
+  color: $gl-text2 !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   MEDIA LIBRARY
+// ══════════════════════════════════════════════════════════
+.media-frame,
+.media-modal-backdrop {
+  background: rgba(5, 6, 12, .92) !important;
+}
+
+.media-frame {
+
+  &-content,
+  .attachment-browser,
+  .media-sidebar {
+    background: $gl-deep !important;
+  }
+
+  .attachment {
+    background: $gl-card !important;
+    border: 2px solid transparent !important;
+    border-radius: $gl-radius-s !important;
+
+    &.selected,
+    &:focus {
+      border-color: $gl-blue !important;
+      box-shadow: $gl-glow-blue !important;
+    }
+  }
+
+  .attachment-info {
+    background: $gl-card !important;
+    border-left: 1px solid $gl-border !important;
+
+    .filename,
+    label {
+      color: $gl-text !important;
+    }
+  }
+
+  &-toolbar,
+  .media-toolbar {
+    background: $gl-surface !important;
+    border-top: 1px solid $gl-border !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   EDITOR DE BLOQUES (Gutenberg)
+// ══════════════════════════════════════════════════════════
+.edit-post-header,
+.editor-header {
+  background: rgba(10, 11, 18, .95) !important;
+  border-bottom: 1px solid $gl-border !important;
+  backdrop-filter: blur(12px) !important;
+
+  .edit-post-header__toolbar,
+  &__toolbar {
+    background: transparent !important;
+  }
+}
+
+.edit-post-layout .interface-interface-skeleton__body {
+  background: $gl-void !important;
+}
+
+.interface-complementary-area,
+.edit-post-sidebar {
+  background: $gl-deep !important;
+  border-left: 1px solid $gl-border !important;
+}
+
+.interface-complementary-area-header,
+.editor-sidebar__panel-tabs {
+  background: $gl-card !important;
+  border-bottom: 1px solid $gl-border !important;
+}
+
+.components-tab-panel__tabs button {
+  color: $gl-text2 !important;
+
+  &[aria-selected="true"] {
+    color: $gl-blue !important;
+    box-shadow: 0 2px 0 $gl-blue !important;
+  }
+}
+
+.components-panel,
+.components-panel__body {
+  background: $gl-deep !important;
+  border: none !important;
+  border-bottom: 1px solid $gl-border !important;
+  color: $gl-text !important;
+}
+
+.components-panel__body {
+  &-title button {
+    color: $gl-text !important;
+    font-size: .82rem !important;
+    font-weight: 700 !important;
+  }
+
+  &-toggle .components-panel__arrow {
+    color: $gl-muted !important;
+  }
+
+  .components-base-control__label {
+    color: $gl-text2 !important;
+  }
+
+  .components-select-control__input {
+    color: $gl-text !important;
+    background: $gl-surface !important;
+  }
+}
+
+.components-base-control__label,
+.components-input-control__label,
+.components-select-control__label,
+.components-checkbox-control__label,
+.components-radio-control__option label,
+.components-toggle-control .components-form-toggle__label,
+.editor-post-author__label,
+.editor-post-excerpt__label,
+.block-editor-link-control__search-label,
+.components-panel__body .components-base-control__label {
+  color: $gl-text2 !important;
+  font-size: .75rem !important;
+  font-weight: 600 !important;
+}
+
+.components-base-control__help,
+.components-input-control__help {
+  color: $gl-muted !important;
+  font-size: .72rem !important;
+}
+
+.interface-complementary-area {
+
+  p,
+  span,
+  label,
+  small {
+    color: $gl-text2 !important;
+  }
+}
+
+.editor-post-slug__label,
+.editor-post-format,
+.editor-post-sticky__label {
+  color: $gl-text2 !important;
+}
+
+.editor-post-author__select {
+  color: $gl-text !important;
+  background: $gl-surface !important;
+}
+
+.editor-sidebar,
+.interface-complementary-area-header {
+  .components-button {
+    color: $gl-text2 !important;
+
+    &:hover {
+      color: $gl-text !important;
+      background: rgba(255, 255, 255, .06) !important;
+    }
+
+    &.is-pressed,
+    &[aria-pressed="true"] {
+      background: rgba(0, 174, 255, .12) !important;
+      color: $gl-blue !important;
+    }
+  }
+}
+
+.editor-post-panel__row,
+.editor-post-panel__row-label,
+.editor-post-panel__row-control {
+  color: $gl-text2 !important;
+  border-bottom: 1px solid $gl-border !important;
+}
+
+.components-text-control__input,
+.components-select-control__input,
+.components-textarea-control__input {
+  background: $gl-surface !important;
+  border: 1px solid $gl-border !important;
+  border-radius: $gl-radius-xs !important;
+  color: $gl-text !important;
+
+  &:focus {
+    border-color: $gl-blue !important;
+    box-shadow: 0 0 0 1px $gl-blue !important;
+  }
+}
+
+.components-form-toggle__input:checked+.components-form-toggle__track {
+  background: $gl-blue !important;
+}
+
+.editor-post-publish-button__button,
+.editor-post-publish-panel__header-publish-button .components-button {
+  @include gl-btn-primary;
+  font-family: $gl-font !important;
+}
+
+.block-editor-block-toolbar,
+.components-toolbar-group {
+  background: $gl-card !important;
+  border-color: $gl-border !important;
+  border-radius: $gl-radius-s !important;
+}
+
+.components-toolbar-button,
+.components-button.has-icon {
+  color: $gl-text2 !important;
+
+  &:hover {
+    color: $gl-text !important;
+    background: rgba(0, 174, 255, .1) !important;
+  }
+}
+
+.editor-styles-wrapper,
+.block-editor-writing-flow {
+  background: $gl-void !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   EDITOR CANVAS
+// ══════════════════════════════════════════════════════════
+.wp-block-post-title,
+.editor-post-title,
+.editor-post-title__input,
+h1.editor-post-title__input,
+.edit-post-visual-editor .editor-post-title__input {
+  color: #e8ecf8 !important;
+  caret-color: $gl-blue !important;
+}
+
+.editor-post-title__input::placeholder,
+.wp-block-post-title[data-empty="true"]::before {
+  color: #3a3f60 !important;
+}
+
+.editor-styles-wrapper {
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li,
+  td,
+  th,
+  figcaption,
+  span,
+  div,
+  a,
+  blockquote,
+  pre,
+  code {
+    color: #d8ddf0 !important;
+  }
+
+  ::selection {
+    background: rgba(0, 174, 255, .25) !important;
+    color: #fff !important;
+  }
+
+  [contenteditable="true"] {
+    caret-color: $gl-blue !important;
+  }
+}
+
+.block-editor-rich-text__editable[data-is-placeholder-visible="true"]::before,
+[data-is-placeholder-visible="true"] .block-editor-rich-text__editable::before,
+.block-editor-default-block-appender__content {
+  color: #353b5a !important;
+  opacity: 1 !important;
+}
+
+.block-editor-block-list__block.is-selected .block-editor-block-list__block-edit::before {
+  border: 1px solid rgba(0, 174, 255, .4) !important;
+  border-radius: 4px !important;
+}
+
+.block-editor-button-block-appender,
+.block-list-appender button {
+  background: rgba(0, 174, 255, .08) !important;
+  border: 1px dashed rgba(0, 174, 255, .25) !important;
+  border-radius: 6px !important;
+  color: $gl-muted !important;
+
+  &:hover {
+    background: rgba(0, 174, 255, .14) !important;
+    border-color: rgba(0, 174, 255, .5) !important;
+    color: $gl-blue !important;
+  }
+}
+
+.components-popover__content,
+.block-editor-inserter__content {
+  background: $gl-card !important;
+  border: 1px solid $gl-border2 !important;
+  border-radius: $gl-radius !important;
+  box-shadow: $gl-shadow !important;
+}
+
+.block-editor-inserter__search input {
+  background: $gl-surface !important;
+  border-color: $gl-border !important;
+  color: $gl-text !important;
+}
+
+.block-editor-block-types-list__item-title {
+  color: $gl-text !important;
+}
+
+.block-editor-inserter__panel-header {
+  color: $gl-text2 !important;
+  border-bottom: 1px solid $gl-border !important;
+}
+
+.components-tooltip__label {
+  background: $gl-card2 !important;
+  color: $gl-text !important;
+  border-radius: 4px !important;
+}
+
+.block-editor-block-breadcrumb {
+  background: $gl-card !important;
+  color: $gl-text2 !important;
+}
+
+.is-fullscreen-mode .edit-post-header {
+  background: rgba(10, 11, 18, .9) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   PÁGINAS DE AJUSTES
+// ══════════════════════════════════════════════════════════
+.wrap {
+  >h1 {
+    color: $gl-text !important;
+    margin-bottom: 6px !important;
+  }
+
+  >p.description {
+    color: $gl-text2 !important;
+    font-size: .85rem !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+.settings-error,
+.settings-updated {
+  border-radius: $gl-radius !important;
+  background: rgba(0, 230, 118, .07) !important;
+  border-left: 3px solid $gl-green !important;
+  color: $gl-text !important;
+}
+
+.nav-tab-wrapper {
+  border-bottom: 1px solid $gl-border2 !important;
+  background: transparent !important;
+}
+
+.nav-tab {
+  background: $gl-card !important;
+  border: 1px solid $gl-border !important;
+  border-bottom: none !important;
+  border-radius: $gl-radius-s $gl-radius-s 0 0 !important;
+  color: $gl-text2 !important;
+  font-size: .82rem !important;
+  font-weight: 600 !important;
+  transition: all $gl-tr !important;
+
+  &:hover {
+    background: $gl-card2 !important;
+    color: $gl-text !important;
+    border-color: $gl-border2 !important;
+  }
+
+  &-active,
+  &-active:hover {
+    background: $gl-surface !important;
+    border-color: $gl-blue !important;
+    color: $gl-blue !important;
+    font-weight: 700 !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   PLUGINS PAGE
+// ══════════════════════════════════════════════════════════
+body.wp-admin {
+  #the-list {
+    .plugin-update-tr {
+      background: rgba(255, 198, 0, .04) !important;
+
+      td {
+        border-top: 1px solid rgba(255, 198, 0, .12) !important;
+      }
+    }
+  }
+
+  .active-plugin>td,
+  .active td {
+    background: rgba(0, 230, 118, .03) !important;
+  }
+
+  .active-plugin>td:first-child,
+  .active td:first-child {
+    box-shadow: inset 3px 0 0 $gl-green !important;
+  }
+
+  .inactive-plugin>td,
+  .inactive td {
+    opacity: .65 !important;
+  }
+
+  .deactivate a,
+  .delete a {
+    color: $gl-red !important;
+  }
+
+  .activate a {
+    color: $gl-green !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   QUICK EDIT
+// ══════════════════════════════════════════════════════════
+.inline-edit-row {
+  background: $gl-card2 !important;
+  border-top: 2px solid $gl-blue !important;
+
+  td {
+    color: $gl-text !important;
+  }
+
+  label span.title {
+    color: $gl-text2 !important;
+    font-size: .75rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: .05em !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   MODALES WP
+// ══════════════════════════════════════════════════════════
+.wp-core-ui {
+
+  .ui-dialog,
+  .ui-widget-content {
+    background: $gl-card !important;
+    border: 1px solid $gl-border2 !important;
+    border-radius: $gl-radius !important;
+    box-shadow: $gl-shadow !important;
+  }
+}
+
+.ui-dialog-titlebar {
+  background: $gl-card2 !important;
+  border-bottom: 1px solid $gl-border !important;
+  color: $gl-text !important;
+  border-radius: $gl-radius $gl-radius 0 0 !important;
+}
+
+.ui-widget-overlay {
+  background: rgba(5, 6, 12, .8) !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   FOOTER
+// ══════════════════════════════════════════════════════════
+#wpfooter {
+  background: transparent !important;
+  border-top: 1px solid $gl-border !important;
+  color: $gl-muted !important;
+  font-size: .75rem !important;
+
+  a {
+    color: $gl-text2 !important;
+
+    &:hover {
+      color: $gl-blue !important;
+    }
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   SCREEN OPTIONS / HELP
+// ══════════════════════════════════════════════════════════
+#screen-meta {
+  background: $gl-card !important;
+  border-bottom: 1px solid $gl-border !important;
+}
+
+#screen-options-wrap,
+#contextual-help-wrap {
+  background: $gl-card !important;
+  border-top: 1px solid $gl-border !important;
+
+  h5 {
+    color: $gl-text !important;
+  }
+}
+
+#screen-meta-links .show-settings {
+  background: $gl-card !important;
+  border: 1px solid $gl-border !important;
+  border-top: none !important;
+  color: $gl-text2 !important;
+  border-radius: 0 0 $gl-radius-xs $gl-radius-xs !important;
+
+  &:hover {
+    color: $gl-blue !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   SPINNER
+// ══════════════════════════════════════════════════════════
+.spinner {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='7' fill='none' stroke='%2300aeff' stroke-width='2' stroke-dasharray='22 10' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  animation: gl-spin 1s linear infinite !important;
+}
+
+@keyframes gl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   SCROLLBAR
+// ══════════════════════════════════════════════════════════
+body.wp-admin,
+#adminmenu {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $gl-void;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 174, 255, .3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0, 174, 255, .55);
+    }
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   FOCUS VISIBLE
+// ══════════════════════════════════════════════════════════
+body.wp-admin :focus-visible {
+  outline: 2px solid $gl-blue !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   ENTRADAS & PÁGINAS — Consistencia visual
+//   Aplica a: edit.php (post-type-post) y edit.php?post_type=page
+// ══════════════════════════════════════════════════════════
+
+// ── Botón "Añadir nueva entrada / página" ─────────────────
+body.wp-admin .page-title-action {
+  background: transparent !important;
+  border: 1px solid rgba(0, 174, 255, .4) !important;
+  border-radius: $gl-radius-s !important;
+  color: $gl-blue !important;
+  font-family: $gl-font !important;
+  font-size: .8rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .02em !important;
+  padding: 5px 14px !important;
+  text-decoration: none !important;
+  transition: all $gl-tr !important;
+
+  &:hover {
+    background: rgba(0, 174, 255, .1) !important;
+    border-color: $gl-blue !important;
+    color: #fff !important;
+    box-shadow: 0 0 12px rgba(0, 174, 255, .2) !important;
+  }
+}
+
+// ── Columnas comunes a Entradas y Páginas ─────────────────
+.wp-list-table {
+
+  // Autor
+  .column-author a {
+    color: $gl-text2 !important;
+    font-size: .82rem !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: $gl-blue !important;
+    }
+  }
+
+  // Comentarios (burbuja)
+  .column-comments {
+    .post-com-count {
+      text-decoration: none !important;
+    }
+
+    .post-com-count-approved {
+      background: $gl-blue !important;
+      color: #fff !important;
+      border-radius: $gl-radius-xs !important;
+      font-size: .7rem !important;
+      font-weight: 700 !important;
+      padding: 2px 7px !important;
+      box-shadow: 0 0 8px rgba(0, 174, 255, .35) !important;
+
+      &::before {
+        border-color: $gl-blue !important;
+      }
+    }
+
+    .post-com-count-no-comments {
+      color: $gl-muted !important;
+      font-size: .78rem !important;
+      opacity: .6 !important;
+    }
+  }
+
+  // Fecha modificada (páginas) — igual que .column-date
+  .column-modified {
+    color: $gl-muted !important;
+    font-size: .78rem !important;
+  }
+
+  // Categorías y etiquetas (entradas)
+  .column-categories a,
+  .column-tags a {
+    color: $gl-text2 !important;
+    font-size: .8rem !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: $gl-blue !important;
+    }
+  }
+
+  // Orden / menú order (páginas)
+  .column-order {
+    color: $gl-muted !important;
+    font-size: .8rem !important;
+  }
+}
+
+// ── Badges de estado — consistentes en entradas y páginas ──
+body.wp-admin {
+
+  // Indicador genérico de estado inline
+  .post-state,
+  .post-state-format {
+    color: $gl-muted !important;
+    font-size: .73rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .02em !important;
+  }
+
+  // Draft
+  tr.status-draft td,
+  .wp-list-table .status-draft .column-status {
+    opacity: .85 !important;
+  }
+
+  .wp-list-table tr.status-draft td:first-child {
+    box-shadow: inset 3px 0 0 $gl-muted !important;
+  }
+
+  // Programado (futuro)
+  .wp-list-table tr.status-future td:first-child {
+    box-shadow: inset 3px 0 0 $gl-gold !important;
+  }
+
+  .wp-list-table tr.status-future .column-date {
+    color: $gl-gold !important;
+  }
+
+  // Privado
+  .wp-list-table tr.status-private td:first-child {
+    box-shadow: inset 3px 0 0 $gl-purple !important;
+  }
+
+  // Pendiente de revisión
+  .wp-list-table tr.status-pending td:first-child {
+    box-shadow: inset 3px 0 0 rgba(255, 198, 0, .7) !important;
+  }
+}
+
+// ── Jerarquía de páginas (sub-páginas indentadas) ─────────
+.wp-list-table {
+
+  // Indentación visual heredada de WP — recolorear el indicador
+  .page-level-1 .row-title,
+  .page-level-2 .row-title,
+  .page-level-3 .row-title {
+    color: $gl-text !important;
+  }
+
+  // Dar un sutil tono diferenciado a sub-páginas
+  tr.page-level-1 td {
+    background: rgba(0, 174, 255, .02) !important;
+  }
+
+  tr.page-level-2 td {
+    background: rgba(0, 174, 255, .04) !important;
+  }
+
+  tr.page-level-3 td {
+    background: rgba(0, 174, 255, .06) !important;
+  }
+
+  // Icono de nivel (WP agrega un guión/flecha antes del título)
+  .row-title .page-level-marker {
+    color: $gl-muted !important;
+  }
+}
+
+// ── Filas bloqueadas (editadas por otro usuario) ──────────
+.wp-list-table {
+  tr.locked td {
+    opacity: .7 !important;
+  }
+
+  .locked-row .locked-info,
+  .lock-holder {
+    color: $gl-muted !important;
+    font-size: .75rem !important;
+
+    a {
+      color: $gl-text2 !important;
+
+      &:hover {
+        color: $gl-blue !important;
+      }
+    }
+
+    img.avatar {
+      border-radius: 50% !important;
+      border: 2px solid rgba(0, 174, 255, .3) !important;
+      vertical-align: middle !important;
+    }
+  }
+}
+
+// ── Sticky posts (entradas destacadas) ────────────────────
+.wp-list-table tr.sticky td:first-child {
+  box-shadow: inset 3px 0 0 $gl-gold !important;
+}
+
+.wp-list-table .sticky .row-title::after {
+  content: '★';
+  color: $gl-gold;
+  font-size: .6rem;
+  margin-left: 5px;
+  vertical-align: middle;
+  opacity: .7;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   OVERRIDE GLS PLUGIN
+// ══════════════════════════════════════════════════════════
+body.gls-page {
+  background-color: $gl-void !important;
+}
+
+
+// ══════════════════════════════════════════════════════════
+//   RESPONSIVE
+// ══════════════════════════════════════════════════════════
+@media screen and (max-width: 782px) {
+  #wpadminbar {
+    position: fixed !important;
+  }
+
+  #adminmenu {
+    background: $gl-deep !important;
+  }
+}
+
+table.fixed {
+  table-layout: initial !important;
+
+}
