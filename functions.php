@@ -13,12 +13,32 @@
   require('inc/woocommerce-account.php');
   require('inc/plan-pro-checkout.php');
 
+  function glmusic_logout_url() {
+    return add_query_arg('gl_logout', '1', home_url('/'));
+  }
+
+  add_action('template_redirect', 'glmusic_handle_logout_request', 0);
+
+  function glmusic_handle_logout_request() {
+    if (empty($_GET['gl_logout'])) {
+        return;
+    }
+
+    nocache_headers();
+    wp_logout();
+
+    wp_safe_redirect(add_query_arg('gl_logged_out', time(), home_url('/mi-cuenta/')));
+    exit;
+  }
+
     // Custom AJAX login handler
   add_action('wp_ajax_nopriv_custom_login', 'handle_custom_login');
   add_action('wp_ajax_custom_login', 'handle_custom_login');
 
   function handle_custom_login() {
     if (isset($_POST['action']) && $_POST['action'] === 'custom_login') {
+        nocache_headers();
+
         $response = array('success' => false, 'message' => '');
 
         if (empty($_POST['username']) || empty($_POST['password'])) {
@@ -27,17 +47,19 @@
             $creds = array(
                 'user_login'    => sanitize_text_field($_POST['username']),
                 'user_password' => $_POST['password'],
-                'remember'      => isset($_POST['rememberme'])
+                'remember'      => !empty($_POST['rememberme'])
             );
 
-            $user = wp_signon($creds, false);
+            $user = wp_signon($creds, is_ssl());
 
             if (is_wp_error($user)) {
                 $response['message'] = $user->get_error_message();
             } else {
+                wp_set_current_user($user->ID);
+
                 $response['success'] = true;
                 $response['message'] = 'Login exitoso';
-                $response['redirect'] = home_url('/mi-cuenta/');
+                $response['redirect'] = add_query_arg('gl_login', time(), home_url('/mi-cuenta/'));
             }
         }
 
@@ -135,5 +157,18 @@
     $args['found_avatar'] = true;
 
     return $args;
+  }
+
+  // Ocultar la barra de administración de WordPress en las vistas de
+  // reproducción de cursos y librerías (incluso para admin/editor): el
+  // reproductor ocupa toda la pantalla y la barra estorba el layout.
+  add_filter('show_admin_bar', 'guitarlima_hide_admin_bar_on_player');
+
+  function guitarlima_hide_admin_bar_on_player($show) {
+    if (is_singular(array('cursos', 'cursos-wp', 'libreria'))) {
+      return false;
+    }
+
+    return $show;
   }
   ?>

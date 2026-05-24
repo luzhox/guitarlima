@@ -821,6 +821,35 @@
     }
   }
 
+  &__cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 13px 24px;
+    color: rgba($color-white, 0.82);
+    background: transparent;
+    border: 1px solid rgba($color-white, 0.28);
+    border-radius: 32px;
+    font-family: $font-primary;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    @include transition(0.2s);
+
+    &:hover {
+      color: $color-white;
+      border-color: rgba(255, 83, 128, 0.9);
+      background: rgba(255, 83, 128, 0.16);
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+  }
+
   &__notice {
     margin-top: 18px;
     padding: 14px 18px;

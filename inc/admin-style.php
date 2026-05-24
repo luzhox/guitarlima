@@ -36,7 +36,7 @@ add_action( 'admin_bar_menu', function( WP_Admin_Bar $bar ) {
     $logo_url = get_template_directory_uri() . '/images/logo.svg';
     $bar->add_node( [
         'id'    => 'gl-logo',
-        'title' => '<img src="' . esc_url( $logo_url ) . '" style="height:22px;width:auto;vertical-align:middle;filter:brightness(0) invert(1);opacity:.85;margin-top:-2px" alt="GL Music">',
+        'title' => '<img src="' . esc_url( 'https://glmusic.pe/wp-content/uploads/2025/07/logo-white.svg' ) . '" style="height:22px;width:auto;vertical-align:middle;filter:brightness(0) invert(1);opacity:.85;margin-top:-2px" alt="GL Music">',
         'href'  => home_url(),
         'meta'  => [ 'title' => 'GL Music — Ir al sitio' ],
     ] );

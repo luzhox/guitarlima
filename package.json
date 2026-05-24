@@ -4,8 +4,8 @@
     "description": "Aquila theme packages",
     "main": "main.js",
     "scripts": {
-        "prod": "cross-env NODE_ENV=production webpack --mode production --progress",
-        "dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
+        "prod": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --mode production --progress",
+        "dev": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider webpack --watch --mode development --progress",
         "clean": "rm -rf build/*",
         "brow": "browser-sync start --proxy 'unalm.local' --files '**/*' --no-notify"
     },
@@ -40,7 +40,6 @@
         "defaults"
     ],
     "dependencies": {
-        "browser-sync": "^2.26.14",
-        "node-sass": "^7.0.0"
+        "browser-sync": "^2.26.14"
     }
 }
