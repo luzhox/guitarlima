@@ -1,0 +1,675 @@
+/* Canciones en masa — UI moderna sobre el admin claro estándar.
+   Paleta: acento #3858e9 (primario del tema) · texto slate · superficies blancas. */
+
+.gl-bulk {
+	--gl-accent: #3858e9;
+	--gl-accent-dark: #2c46c9;
+	--gl-accent-tint: rgba(56, 88, 233, 0.08);
+	--gl-accent-border: rgba(56, 88, 233, 0.35);
+	--gl-text: #0f172a;
+	--gl-body: #334155;
+	--gl-muted: #64748b;
+	--gl-border: #e2e8f0;
+	--gl-surface: #fff;
+	--gl-surface-2: #f8fafc;
+	--gl-radius: 14px;
+	--gl-radius-s: 9px;
+	--gl-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 24px rgba(15, 23, 42, 0.06);
+	max-width: 1060px;
+	color: var(--gl-body);
+}
+
+.gl-bulk .gl-icon {
+	flex: 0 0 auto;
+	vertical-align: -3px;
+}
+
+/* ── Cabecera ── */
+
+.gl-bulk .gl-bulk-heading {
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--gl-text);
+	letter-spacing: -0.02em;
+	margin: 8px 0 2px;
+	padding: 0;
+}
+
+.gl-bulk .gl-bulk-sub {
+	margin: 0 0 18px;
+	color: var(--gl-muted);
+	font-size: 13.5px;
+}
+
+/* ── Tabs segmentados ── */
+
+.gl-bulk .gl-tabs {
+	display: inline-flex;
+	gap: 4px;
+	padding: 4px;
+	background: #e9edf5;
+	border-radius: 999px;
+	margin-bottom: 20px;
+}
+
+.gl-bulk .gl-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 8px 18px;
+	border-radius: 999px;
+	font-size: 13.5px;
+	font-weight: 600;
+	color: #475569;
+	text-decoration: none;
+	cursor: pointer;
+	transition: color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.gl-bulk .gl-tab:hover {
+	color: var(--gl-text);
+	background: rgba(255, 255, 255, 0.65);
+}
+
+.gl-bulk .gl-tab:focus-visible {
+	outline: 2px solid var(--gl-accent);
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+.gl-bulk .gl-tab.is-active {
+	background: var(--gl-surface);
+	color: var(--gl-accent);
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+}
+
+/* ── Paneles y cards ── */
+
+.gl-bulk .gl-bulk-panel {
+	display: none;
+}
+
+.gl-bulk .gl-bulk-panel.is-active {
+	display: block;
+}
+
+.gl-bulk .gl-card {
+	background: var(--gl-surface);
+	border: 1px solid var(--gl-border);
+	border-radius: var(--gl-radius);
+	box-shadow: var(--gl-shadow);
+	overflow: hidden;
+}
+
+.gl-bulk .gl-card__head {
+	padding: 22px 26px 18px;
+	border-bottom: 1px solid var(--gl-border);
+	background: linear-gradient(180deg, var(--gl-surface-2), var(--gl-surface));
+}
+
+.gl-bulk .gl-card__head h2 {
+	margin: 0 0 4px;
+	font-size: 17px;
+	font-weight: 700;
+	color: var(--gl-text);
+}
+
+.gl-bulk .gl-card__head p {
+	margin: 0;
+	color: var(--gl-muted);
+	font-size: 13px;
+}
+
+.gl-bulk .gl-card__body {
+	padding: 24px 26px;
+}
+
+/* ── Pasos ── */
+
+.gl-bulk .gl-step {
+	display: flex;
+	gap: 16px;
+	padding: 4px 0 22px;
+}
+
+.gl-bulk .gl-step + .gl-step {
+	border-top: 1px dashed var(--gl-border);
+	padding-top: 22px;
+}
+
+.gl-bulk .gl-step__num {
+	flex: 0 0 auto;
+	width: 30px;
+	height: 30px;
+	display: grid;
+	place-items: center;
+	border-radius: 50%;
+	background: var(--gl-accent-tint);
+	color: var(--gl-accent);
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.gl-bulk .gl-step__content {
+	flex: 1;
+	min-width: 0;
+}
+
+.gl-bulk .gl-step__content h3 {
+	margin: 4px 0 6px;
+	font-size: 14.5px;
+	font-weight: 600;
+	color: var(--gl-text);
+}
+
+.gl-bulk .gl-step__content > p {
+	margin: 0 0 12px;
+	color: var(--gl-muted);
+	font-size: 13px;
+}
+
+.gl-bulk code {
+	background: var(--gl-accent-tint);
+	color: var(--gl-accent-dark);
+	border-radius: 4px;
+	padding: 1px 6px;
+	font-size: 12px;
+}
+
+/* ── Botones ── */
+
+.gl-bulk .gl-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	border-radius: var(--gl-radius-s);
+	border: 1px solid transparent;
+	font-size: 13.5px;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.gl-bulk .gl-btn:focus-visible {
+	outline: 2px solid var(--gl-accent);
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+.gl-bulk .gl-btn--primary {
+	background: var(--gl-accent);
+	color: #fff;
+	box-shadow: 0 4px 14px rgba(56, 88, 233, 0.35);
+}
+
+.gl-bulk .gl-btn--primary:hover {
+	background: var(--gl-accent-dark);
+	color: #fff;
+}
+
+.gl-bulk .gl-btn--ghost {
+	background: var(--gl-surface);
+	border-color: var(--gl-border);
+	color: var(--gl-body);
+}
+
+.gl-bulk .gl-btn--ghost:hover {
+	border-color: var(--gl-accent-border);
+	color: var(--gl-accent);
+}
+
+.gl-bulk .gl-btn--sm {
+	padding: 7px 14px;
+	font-size: 12.5px;
+}
+
+/* ── Dropzone ── */
+
+.gl-bulk .gl-dropzone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 30px 20px;
+	border: 2px dashed #cbd5e1;
+	border-radius: var(--gl-radius);
+	background: var(--gl-surface-2);
+	color: var(--gl-muted);
+	text-align: center;
+	cursor: pointer;
+	margin-bottom: 18px;
+	transition: border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+.gl-bulk .gl-dropzone:hover,
+.gl-bulk .gl-dropzone.is-drag {
+	border-color: var(--gl-accent);
+	background: var(--gl-accent-tint);
+	color: var(--gl-accent);
+}
+
+.gl-bulk .gl-dropzone input[type='file'] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	overflow: hidden;
+}
+
+.gl-bulk .gl-dropzone:has(input:focus-visible) {
+	outline: 2px solid var(--gl-accent);
+	outline-offset: 2px;
+}
+
+.gl-bulk .gl-dropzone strong {
+	color: var(--gl-text);
+	font-size: 13.5px;
+	font-weight: 600;
+}
+
+.gl-bulk .gl-dropzone.is-drag strong,
+.gl-bulk .gl-dropzone:hover strong {
+	color: var(--gl-accent);
+}
+
+.gl-bulk .gl-dropzone__hint {
+	font-size: 12px;
+}
+
+.gl-bulk .gl-dropzone__file {
+	font-size: 12.5px;
+	font-weight: 600;
+	color: var(--gl-accent);
+}
+
+.gl-bulk .gl-dropzone__file:empty {
+	display: none;
+}
+
+.gl-bulk .gl-dropzone:has(input:valid) {
+	border-style: solid;
+	border-color: var(--gl-accent-border);
+}
+
+/* ── Campos ── */
+
+.gl-bulk .gl-field {
+	margin: 0 0 18px;
+}
+
+.gl-bulk .gl-field-row {
+	display: flex;
+	gap: 18px;
+	margin-bottom: 18px;
+}
+
+.gl-bulk .gl-field__label {
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--gl-muted);
+	margin-bottom: 8px;
+}
+
+.gl-bulk .gl-field__label em {
+	font-weight: 500;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.gl-bulk .gl-select {
+	min-width: 200px;
+	padding: 8px 12px;
+	border: 1px solid var(--gl-border);
+	border-radius: var(--gl-radius-s);
+	background-color: var(--gl-surface);
+	color: var(--gl-text);
+	font-size: 13.5px;
+	line-height: 1.4;
+	box-shadow: none;
+	max-width: 100%;
+}
+
+.gl-bulk .gl-select:focus {
+	border-color: var(--gl-accent);
+	box-shadow: 0 0 0 3px var(--gl-accent-tint);
+	outline: none;
+	color: var(--gl-text);
+}
+
+/* ── Chips de categorías ── */
+
+.gl-bulk .gl-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.gl-bulk .gl-chip {
+	position: relative;
+	cursor: pointer;
+}
+
+.gl-bulk .gl-chip input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.gl-bulk .gl-chip span {
+	display: inline-block;
+	padding: 6px 14px;
+	border: 1px solid var(--gl-border);
+	border-radius: 999px;
+	background: var(--gl-surface);
+	color: var(--gl-body);
+	font-size: 12.5px;
+	font-weight: 500;
+	transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.gl-bulk .gl-chip:hover span {
+	border-color: var(--gl-accent-border);
+	color: var(--gl-accent);
+}
+
+.gl-bulk .gl-chip:has(input:checked) span {
+	background: var(--gl-accent);
+	border-color: var(--gl-accent);
+	color: #fff;
+}
+
+.gl-bulk .gl-chip:has(input:focus-visible) span {
+	outline: 2px solid var(--gl-accent);
+	outline-offset: 2px;
+}
+
+/* ── Toolbar de asignación ── */
+
+.gl-bulk .gl-toolbar {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 14px;
+}
+
+.gl-bulk .gl-search {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	color: var(--gl-muted);
+}
+
+.gl-bulk .gl-search .gl-icon {
+	position: absolute;
+	left: 11px;
+	pointer-events: none;
+}
+
+.gl-bulk .gl-search input {
+	width: 240px;
+	padding: 8px 12px 8px 34px;
+	border: 1px solid var(--gl-border);
+	border-radius: 999px;
+	background: var(--gl-surface);
+	color: var(--gl-text);
+	font-size: 13px;
+	box-shadow: none;
+}
+
+.gl-bulk .gl-search input:focus {
+	border-color: var(--gl-accent);
+	box-shadow: 0 0 0 3px var(--gl-accent-tint);
+	outline: none;
+}
+
+.gl-bulk .gl-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 12.5px;
+	color: var(--gl-body);
+	cursor: pointer;
+}
+
+.gl-bulk .gl-count {
+	margin-left: auto;
+	font-size: 12.5px;
+	color: var(--gl-muted);
+}
+
+.gl-bulk .gl-count strong {
+	color: var(--gl-accent);
+	font-size: 14px;
+}
+
+/* ── Lista de canciones ── */
+
+.gl-bulk .gl-song-list {
+	max-height: 400px;
+	overflow-y: auto;
+	border: 1px solid var(--gl-border);
+	border-radius: var(--gl-radius-s);
+	background: var(--gl-surface);
+	margin-bottom: 20px;
+	scrollbar-width: thin;
+	scrollbar-color: #cbd5e1 transparent;
+}
+
+.gl-bulk .gl-song-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 14px;
+	border-bottom: 1px solid #f1f5f9;
+	cursor: pointer;
+	transition: background-color 0.12s ease;
+}
+
+.gl-bulk .gl-song-row:last-child {
+	border-bottom: 0;
+}
+
+.gl-bulk .gl-song-row:hover {
+	background: var(--gl-surface-2);
+}
+
+.gl-bulk .gl-song-row:has(input:checked) {
+	background: var(--gl-accent-tint);
+}
+
+.gl-bulk .gl-song-row input[type='checkbox'] {
+	margin: 0;
+	border-radius: 4px;
+	border-color: #cbd5e1;
+}
+
+.gl-bulk .gl-song-row input[type='checkbox']:checked {
+	background: var(--gl-accent);
+	border-color: var(--gl-accent);
+}
+
+.gl-bulk .gl-song-row__title {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--gl-text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.gl-bulk .gl-song-row__status {
+	flex: 0 0 auto;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	background: #fef3c7;
+	color: #92400e;
+	border-radius: 4px;
+	padding: 2px 6px;
+}
+
+.gl-bulk .gl-song-row__cats {
+	margin-left: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 4px;
+	max-width: 45%;
+}
+
+.gl-bulk .gl-song-row__cats i {
+	font-style: normal;
+	font-size: 11px;
+	color: #475569;
+	background: #f1f5f9;
+	border-radius: 999px;
+	padding: 2px 8px;
+	white-space: nowrap;
+}
+
+.gl-bulk .gl-song-row__cats em {
+	font-size: 11.5px;
+	color: #94a3b8;
+}
+
+/* ── Modos de acción ── */
+
+.gl-bulk .gl-modes {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 10px;
+	max-width: 640px;
+}
+
+.gl-bulk .gl-mode {
+	position: relative;
+	display: block;
+	padding: 12px 14px;
+	border: 1px solid var(--gl-border);
+	border-radius: var(--gl-radius-s);
+	background: var(--gl-surface);
+	cursor: pointer;
+	transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.gl-bulk .gl-mode:hover {
+	border-color: var(--gl-accent-border);
+}
+
+.gl-bulk .gl-mode:has(input:checked) {
+	border-color: var(--gl-accent);
+	background: var(--gl-accent-tint);
+	box-shadow: inset 0 0 0 1px var(--gl-accent);
+}
+
+.gl-bulk .gl-mode:has(input:focus-visible) {
+	outline: 2px solid var(--gl-accent);
+	outline-offset: 2px;
+}
+
+.gl-bulk .gl-mode input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.gl-bulk .gl-mode__title {
+	display: block;
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--gl-text);
+	margin-bottom: 2px;
+}
+
+.gl-bulk .gl-mode:has(input:checked) .gl-mode__title {
+	color: var(--gl-accent);
+}
+
+.gl-bulk .gl-mode__desc {
+	display: block;
+	font-size: 11.5px;
+	color: var(--gl-muted);
+}
+
+/* ── Export ── */
+
+.gl-bulk .gl-card--center {
+	text-align: center;
+}
+
+.gl-bulk .gl-export {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	padding: 44px 28px;
+}
+
+.gl-bulk .gl-export__icon {
+	display: grid;
+	place-items: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: var(--gl-accent-tint);
+	color: var(--gl-accent);
+	margin-bottom: 10px;
+}
+
+.gl-bulk .gl-export__count {
+	font-size: 38px;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	color: var(--gl-text);
+	line-height: 1;
+}
+
+.gl-bulk .gl-export__label {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--gl-muted);
+	margin-bottom: 12px;
+}
+
+.gl-bulk .gl-export p {
+	margin: 0 0 20px;
+	color: var(--gl-muted);
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+/* ── Notices ── */
+
+.gl-bulk .gl-notice {
+	border-radius: var(--gl-radius-s);
+	border: 1px solid var(--gl-border);
+	border-left-width: 4px;
+	box-shadow: var(--gl-shadow);
+	padding: 4px 16px;
+	margin: 0 0 18px;
+}
+
+.gl-bulk .gl-bulk-created {
+	columns: 3 240px;
+	margin: 4px 0 8px 20px;
+	list-style: disc;
+}
+
+/* ── Accesibilidad ── */
+
+@media (prefers-reduced-motion: reduce) {
+	.gl-bulk * {
+		transition: none !important;
+	}
+}

@@ -3,13 +3,39 @@
     "title": "Cursos",
     "fields": [
         {
+            "key": "field_df38f56dd4534",
+            "label": "Categorías (cursos / librerías)",
+            "name": "categorias",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Escribe para buscar y selecciona una o varias categorías. Esto asigna las categorías reales de la canción — su relación con cursos y librerías.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "category",
+            "add_term": 1,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "field_type": "multi_select",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        },
+        {
             "key": "field_684cbc3c6c75e",
             "label": "Id de video",
             "name": "idVideo",
             "aria-label": "",
             "type": "text",
-            "instructions": "Es el id único del embebido",
-            "required": 0,
+            "instructions": "Es el id único del embebido por ejemplo tNMdc",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -89,5 +115,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1753152097
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1784809214
 }
