@@ -29,7 +29,7 @@ if ($account_user) {
 
 			<?php if (!is_user_logged_in()): ?>
 				<div class="user-actions hide-on-medium-onlytwo">
-					<a href="/mi-cuenta" class="btn__primary--border login-btn" style="margin-left: 24px;" title="Iniciar sesión">
+					<a href="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" class="btn__primary--border login-btn" style="margin-left: 24px;" title="Iniciar sesión" data-login-modal-open>
 						Iniciar sesión
 					</a>
 				</div>
@@ -47,7 +47,7 @@ if ($account_user) {
 					<div class="account-menu__dropdown" role="menu">
 						<a href="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" role="menuitem">Ver perfil</a>
 						<a href="<?php echo esc_url(home_url('/mis-favoritos/')); ?>" role="menuitem">Mis favoritos</a>
-						<a href="<?php echo esc_url(wp_logout_url(home_url('/mi-cuenta/'))); ?>" role="menuitem">Cerrar sesión</a>
+						<a href="<?php echo esc_url(glmusic_logout_url()); ?>" role="menuitem">Cerrar sesión</a>
 					</div>
 				</div>
 			</div>
@@ -73,7 +73,7 @@ if ($account_user) {
 					</div>
 				<?php else: ?>
 					<div class="fav hide-on-desktop-only">
-						<a href="/mi-cuenta" class="btn__primary--border login-btn-mov" title="Iniciar sesión">
+						<a href="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" class="btn__primary--border login-btn-mov" title="Iniciar sesión" data-login-modal-open>
 							Iniciar sesión
 						</a>
 					</div>
@@ -93,13 +93,13 @@ if ($account_user) {
 						<div class="account-menu__dropdown" role="menu">
 							<a href="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" role="menuitem">Ver perfil</a>
 							<a href="<?php echo esc_url(home_url('/mis-favoritos/')); ?>" role="menuitem">Mis favoritos</a>
-							<a href="<?php echo esc_url(wp_logout_url(home_url('/mi-cuenta/'))); ?>" role="menuitem">Cerrar sesión</a>
+							<a href="<?php echo esc_url(glmusic_logout_url()); ?>" role="menuitem">Cerrar sesión</a>
 						</div>
 					</div>
 				</div>
 			<?php else: ?>
 				<div class="user-actions">
-					<a href="/mi-cuenta" class="btn__primary--border login-btn" style="margin-left: 24px;" title="Iniciar sesión">
+					<a href="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" class="btn__primary--border login-btn" style="margin-left: 24px;" title="Iniciar sesión" data-login-modal-open>
 						Iniciar sesión
 					</a>
 				</div>
@@ -107,3 +107,8 @@ if ($account_user) {
 		</div>
 	</div>
 </header>
+<?php
+if (!is_user_logged_in()) {
+	include get_template_directory() . '/modules/login-modal/login-modal.php';
+}
+?>

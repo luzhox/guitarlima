@@ -58,7 +58,7 @@ $allowed_html = array(
 			<a class="account-dashboard__profile-button" href="<?php echo esc_url( wc_get_endpoint_url( 'edit-account' ) ); ?>">
 				<?php esc_html_e( 'Editar perfil', 'woocommerce' ); ?>
 			</a>
-			<a class="account-dashboard__profile-link" href="<?php echo esc_url( wc_logout_url() ); ?>">
+			<a class="account-dashboard__profile-link" href="<?php echo esc_url( glmusic_logout_url() ); ?>">
 				<?php esc_html_e( 'Cerrar sesión', 'woocommerce' ); ?>
 			</a>
 		</div>
@@ -72,7 +72,7 @@ $allowed_html = array(
 			printf(
 				wp_kses( __( '¿No eres %1$s? <a href="%2$s">Cerrar sesión</a>', 'woocommerce' ), $allowed_html ),
 				'<strong>' . esc_html( $current_user->display_name ) . '</strong>',
-				esc_url( wc_logout_url() )
+				esc_url( glmusic_logout_url() )
 			);
 			?>
 		</p>

@@ -7,11 +7,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function guitarlima_plan_pro_checkout_slug() {
+function guitarlima_plan_pro_checkout_slug()
+{
     return 'comprar-plan-pro';
 }
 
-function guitarlima_plan_pro_checkout_url($plan_id = 0) {
+function guitarlima_plan_pro_checkout_url($plan_id = 0)
+{
     $url = home_url('/' . guitarlima_plan_pro_checkout_slug() . '/');
 
     if ($plan_id) {
@@ -21,17 +23,19 @@ function guitarlima_plan_pro_checkout_url($plan_id = 0) {
     return $url;
 }
 
-function guitarlima_default_pro_plan_id() {
+function guitarlima_default_pro_plan_id()
+{
     /**
      * Default local GLSubs Pro plan id.
      *
      * Keep filterable so production/staging can override this without editing
      * the checkout template.
      */
-    return (int) apply_filters('guitarlima_default_pro_plan_id', 781);
+    return (int) apply_filters('guitarlima_default_pro_plan_id', 890);
 }
 
-function guitarlima_is_plan_pro_checkout_request() {
+function guitarlima_is_plan_pro_checkout_request()
+{
     $path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
     $path = trim((string) $path, '/');
 

@@ -102,13 +102,26 @@ if (is_user_logged_in()) {
     }
 
     $primary_subscription = !empty($active_subscriptions) ? $active_subscriptions[0] : null;
+    $is_admin = current_user_can('manage_options');
     $subscription_status = 'Sin plan activo';
     $subscription_label = 'Explora el Plan Pro para desbloquear cursos y librerías.';
 
-    if ($primary_subscription) {
+    if ($is_admin) {
+        // Los administradores tienen acceso completo; no se les ofrece el Plan Pro.
+        $subscription_status = 'Admin';
+        $subscription_label = 'Acceso completo';
+    } elseif ($primary_subscription) {
         $plan_title = get_the_title((int) $primary_subscription->plan_id);
         $subscription_status = $primary_subscription->status === 'active' ? 'Suscripción activa' : 'Suscripción pendiente';
         $subscription_label = $plan_title ?: 'Plan GL Music';
+    }
+
+    // El botón de cancelar reutiliza el endpoint AJAX (gls_cancel_subscription)
+    // y el JS (bindCancel) del plugin glmusic-subscriptions.
+    $can_cancel_subscription = !$is_admin && $primary_subscription && $primary_subscription->status === 'active';
+    if ($can_cancel_subscription) {
+        wp_enqueue_script('gls-checkout');
+        wp_enqueue_style('gls-checkout');
     }
     ?>
 
@@ -132,11 +145,14 @@ if (is_user_logged_in()) {
                         </div>
                     </div>
                     <div class="account-panel__actions">
-                        <?php if (!$primary_subscription) : ?>
+                        <?php if (!$is_admin && !$primary_subscription) : ?>
                             <a class="account-panel__button account-panel__button--pro" href="<?php echo esc_url($checkout_url); ?>">Suscribirme al Plan Pro</a>
                         <?php endif; ?>
                         <a class="account-panel__button" href="<?php echo esc_url(home_url('/mi-cuenta/?editar-perfil=1')); ?>">Editar perfil</a>
-                        <a class="account-panel__link" href="<?php echo esc_url(wp_logout_url(home_url('/mi-cuenta/'))); ?>">Cerrar sesión</a>
+                        <a class="account-panel__link" href="<?php echo esc_url(glmusic_logout_url()); ?>">Cerrar sesión</a>
+                        <?php if ($can_cancel_subscription) : ?>
+                            <button type="button" class="account-panel__cancel gls-cancel-btn" data-sub-id="<?php echo esc_attr($primary_subscription->id); ?>">Cancelar suscripción</button>
+                        <?php endif; ?>
                     </div>
                 </section>
 

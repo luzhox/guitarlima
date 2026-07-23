@@ -95,8 +95,9 @@ if ($_POST && isset($_POST['wp-submit-register'])) {
                             <label for="user_password">Contraseña *</label>
                             <div class="password-field-wrapper">
                                 <input type="password" name="password" id="user_password" class="input password-input" required>
-                                <button type="button" class="password-toggle" data-target="user_password">
-                                    <span class="eye-icon">👁</span>
+                                <button type="button" class="password-toggle" data-target="user_password" aria-label="Mostrar contraseña">
+                                    <span class="password-toggle__show" aria-hidden="true">Ver</span>
+                                    <span class="password-toggle__hide" aria-hidden="true">Ocultar</span>
                                 </button>
                             </div>
                             <small class="form-help">Mínimo 6 caracteres.</small>
@@ -106,8 +107,9 @@ if ($_POST && isset($_POST['wp-submit-register'])) {
                             <label for="user_password_confirm">Confirmar Contraseña *</label>
                             <div class="password-field-wrapper">
                                 <input type="password" name="password_confirm" id="user_password_confirm" class="input password-input" required>
-                                <button type="button" class="password-toggle" data-target="user_password_confirm">
-                                    <span class="eye-icon">👁</span>
+                                <button type="button" class="password-toggle" data-target="user_password_confirm" aria-label="Mostrar contraseña">
+                                    <span class="password-toggle__show" aria-hidden="true">Ver</span>
+                                    <span class="password-toggle__hide" aria-hidden="true">Ocultar</span>
                                 </button>
                             </div>
                             <small class="form-help">Debe coincidir con la contraseña.</small>
@@ -117,7 +119,7 @@ if ($_POST && isset($_POST['wp-submit-register'])) {
                             <input type="hidden" id="terms_accepted" name="terms" value="0">
                             <div class="terms-button-wrapper">
                                 <button type="button" id="accept_terms_btn" class="terms-button">
-                                    <span class="terms-icon">☐</span>
+                                    <span class="terms-icon" aria-hidden="true"></span>
                                     <span class="terms-text">Acepto los <a href="#" target="_blank">términos y condiciones</a></span>
                                 </button>
                             </div>
@@ -132,11 +134,11 @@ if ($_POST && isset($_POST['wp-submit-register'])) {
                 <?php endif; ?>
 
                 <div class="register-footer">
-                    <p class="login-link" style="color:white;">
-                        ¿Ya tienes una cuenta? <a href="https://glmusic.pe/mi-cuenta/">Inicia sesión aquí</a>
+                    <p class="login-link">
+                        ¿Ya tienes una cuenta? <a href="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" data-login-modal-open>Inicia sesión aquí</a>
                     </p>
                     <p class="back-to-site">
-                        <a href="<?php echo home_url(); ?>">← Volver al sitio</a>
+                        <a href="<?php echo esc_url(home_url()); ?>">Volver al sitio</a>
                     </p>
                 </div>
             </div>
@@ -144,122 +146,18 @@ if ($_POST && isset($_POST['wp-submit-register'])) {
     </div>
 </div>
 
-<style>
-.password-field-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.password-input {
-    padding-right: 50px !important;
-}
-
-.password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    font-size: 16px;
-    color: #666;
-    transition: color 0.3s ease;
-}
-
-.password-toggle:hover {
-    color: #667eea;
-}
-
-.password-toggle.showing .eye-icon {
-    opacity: 0.7;
-}
-
-.terms-group {
-    margin-bottom: 1.5rem;
-}
-
-.terms-button-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.terms-button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: none;
-    border: 2px solid #e1e5e9;
-    border-radius: 8px;
-    padding: 12px 16px;
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #666;
-    transition: all 0.3s ease;
-    width: 100%;
-    text-align: left;
-}
-
-.terms-button:hover {
-    border-color: #667eea;
-    background: #f8f9ff;
-}
-
-.terms-button.accepted {
-    background: #667eea;
-    border-color: #667eea;
-    color: white;
-}
-
-.terms-button.accepted .terms-icon {
-    color: white;
-}
-
-.terms-icon {
-    font-size: 16px;
-    color: #999;
-    transition: color 0.3s ease;
-}
-
-.terms-text {
-    flex: 1;
-}
-
-.terms-text a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.terms-text a:hover {
-    text-decoration: underline;
-}
-
-.terms-button.accepted .terms-text a {
-    color: white;
-}
-</style>
-
 <script>
 jQuery(document).ready(function($) {
     // Password toggle functionality
-    $('.password-toggle').on('click', function() {
+    $('.register-page .password-toggle').on('click', function() {
         const button = $(this);
         const targetId = button.data('target');
         const input = $('#' + targetId);
-        const icon = button.find('.eye-icon');
+        const isPassword = input.attr('type') === 'password';
 
-        if (input.attr('type') === 'password') {
-            input.attr('type', 'text');
-            icon.text('🙈');
-            button.addClass('showing');
-        } else {
-            input.attr('type', 'password');
-            icon.text('👁');
-            button.removeClass('showing');
-        }
+        input.attr('type', isPassword ? 'text' : 'password');
+        button.toggleClass('showing', isPassword);
+        button.attr('aria-label', isPassword ? 'Ocultar contraseña' : 'Mostrar contraseña');
     });
 
     let termsAccepted = false;
@@ -272,14 +170,10 @@ jQuery(document).ready(function($) {
 
         if (termsAccepted) {
             button.addClass('accepted');
-            button.find('.terms-icon').text('☑');
             hiddenInput.val('1');
-            console.log('Terms accepted');
         } else {
             button.removeClass('accepted');
-            button.find('.terms-icon').text('☐');
             hiddenInput.val('0');
-            console.log('Terms not accepted');
         }
     });
 
@@ -291,16 +185,6 @@ jQuery(document).ready(function($) {
         const password = $('#user_password').val();
         const passwordConfirm = $('#user_password_confirm').val();
         const terms = $('#terms_accepted').val() === '1';
-
-        console.log('=== FORM SUBMISSION DEBUG ===');
-        console.log('Username:', username);
-        console.log('Email:', email);
-        console.log('Password length:', password.length);
-        console.log('Password confirm:', passwordConfirm);
-        console.log('Terms accepted (hidden input):', $('#terms_accepted').val());
-        console.log('Terms accepted (boolean):', terms);
-        console.log('Terms accepted (variable):', termsAccepted);
-        console.log('Terms to be sent:', terms ? '1' : '0');
 
         // Basic validation
         if (!username || !email || !password || !passwordConfirm) {
@@ -320,11 +204,8 @@ jQuery(document).ready(function($) {
 
         if (!terms) {
             showMessage('Debes aceptar los términos y condiciones.', 'error');
-            console.log('TERMS VALIDATION FAILED - Terms not accepted');
             return;
         }
-
-        console.log('All validations passed, proceeding with registration');
 
         // Show loading state
         $('#wp-submit-register').prop('disabled', true).text('Creando cuenta...');
@@ -345,7 +226,6 @@ jQuery(document).ready(function($) {
                 terms: terms ? '1' : '0'
             },
             success: function(response) {
-                console.log('AJAX response:', response);
                 if (response.success) {
                     $('#register-form').html('<div class="register-success"><p>¡Cuenta creada exitosamente! Redirigiendo...</p></div>');
                     setTimeout(function() {
@@ -356,8 +236,7 @@ jQuery(document).ready(function($) {
                     $('#wp-submit-register').prop('disabled', false).text('Crear Cuenta');
                 }
             },
-            error: function(xhr, status, error) {
-                console.log('AJAX error:', error);
+            error: function() {
                 showMessage('Error de conexión. Por favor, intenta de nuevo.', 'error');
                 $('#wp-submit-register').prop('disabled', false).text('Crear Cuenta');
             }
