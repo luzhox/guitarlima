@@ -50,7 +50,7 @@ LigoPay's `docs/project-ingestion.md` is the model for how future agents should 
 
 Use LigoPay's `CLAUDE.md` as a reference model for how to reason, but adapt every implementation detail to GuitarLima.
 
-- Include order can matter. In this theme `functions.php` loads `inc/opciones.php`, `inc/customizer.php`, `inc/widgets.php`, `inc/login.php`, `inc/menus.php`, `inc/formats.php`, `inc/libraries.php`, `lib/helpers.php`, `inc/etc.php`, `inc/favorites.php`, `inc/admin-style.php`, and `inc/woocommerce-account.php`. Before moving includes or adding dependencies, confirm which functions are defined where.
+- Include order can matter. In this theme `functions.php` loads `inc/opciones.php`, `inc/customizer.php`, `inc/widgets.php`, `inc/login.php`, `inc/menus.php`, `inc/formats.php`, `inc/libraries.php`, `lib/helpers.php`, `inc/etc.php`, `inc/favorites.php`, `inc/admin-style.php`, `inc/woocommerce-account.php`, `inc/plan-pro-checkout.php`, `inc/members-content-permissions-fix.php`, `inc/canciones-admin.php`, and `inc/canciones-bulk.php`. Before moving includes or adding dependencies, confirm which functions are defined where.
 - Asset enqueueing belongs in `wp_enqueue_scripts` or `admin_enqueue_scripts`. If PHP needs to pass AJAX URLs or nonces to JavaScript, enqueue first and then call `wp_localize_script()`.
 - ACF registrations and options-page setup should happen on `acf/init` when using ACF APIs. GuitarLima already uses `inc/etc.php` to set the Google Maps API key with `acf_update_setting()`.
 - Flexible Content layout names use underscores in ACF and this theme maps them to dashed module folders. Example: `course_percat` becomes `modules/course-percat/course-percat.php`.
@@ -74,6 +74,19 @@ Use LigoPay's `CLAUDE.md` as a reference model for how to reason, but adapt ever
 - Buttons should follow `.btn` and `.btn__primary`: 32px radius, gradient fill, clear hover brightness, and generous horizontal padding.
 - Layouts should respect `.container`: `width: 84%`, mobile max `480px`, tablet max `750px`, desktop max `1184px`.
 - Hero modules are image-first with overlays and Owl Carousel. Do not replace the current photographic/music-course feel with generic decorative gradients or illustrations.
+
+## Canciones, wp-admin State & Commerce (updated 2026-07-23)
+
+Facts that override older sections of this guide when they conflict.
+
+- Songs are the CPT with internal slug `cursos` (label "Canciones", rewrite `canciones`). Their relation to Cursos (`cursos-wp`) and Librerías (`libreria`) is the core `category` taxonomy: listings/modules query songs with `tax_query` on `category`, and each Curso/Librería declares its category via the ACF `cat` field.
+- Song categories are edited through the ACF field `categorias` (taxonomy, multi-select autocomplete, `save_terms` + `load_terms`, key `field_df38f56dd4534` in `acf-json/group_684cbc3c38408.json`). The native Categories panel is hidden for `cursos` in the block editor (`inc/canciones-admin.php`) so there is a single write path — do not re-enable it without removing the ACF field.
+- Bulk tooling lives in **Canciones → Carga masiva** (`inc/canciones-bulk.php`, class `GL_Canciones_Bulk`, capability `publish_posts`): three tabs — Excel bulk upload (template download included), mass category assignment (add/replace/remove), and full catalog export. `.xlsx` read/write is native via `inc/gl-xlsx.php` (`GL_XLSX`), no external libraries.
+- Songs no longer require an image: bulk-created songs get `images/cancion-dummy.png` (white GL wordmark on `#3858e9`, regenerable with `bin/generate-cancion-dummy.php --white`) as featured image and ACF `poster`. The attachment is sideloaded once and cached in option `gl_cancion_dummy_id`.
+- The global dark wp-admin skin was **removed** (2026-07-23): wp-admin is standard light. What remains custom: admin-bar logo, footer text, dashboard cleanup, and the fully custom login (`admin/login.css` + section 5 of `inc/admin-style.php`). The dark UI lives only in the GL Subs plugin screens (scoped to `body.gls-page`). When deploying, run once in production: `UPDATE wp_usermeta SET meta_value='fresh' WHERE meta_key='admin_color' AND meta_value='midnight';`
+- Publishing songs previously failed for every role (broken Members `auth_callback` on `_members_access_role`); the upgrade-safe fix is `inc/members-content-permissions-fix.php`.
+- Commerce/memberships do **not** go through WooCommerce anymore: they live in the custom plugin `wp-content/plugins/glmusic-subscriptions/` (`GLS_*` classes, PayPal Subscriptions REST API). WooCommerce is still installed but is being phased out as the payment path — older mentions of WooCommerce as the commerce layer in this guide and `DESIGN.md` are outdated on that point.
+- Design/decision records for the above: `docs/superpowers/specs/2026-07-23-*.md`.
 
 ## High-Impact Files
 
