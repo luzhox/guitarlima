@@ -1181,12 +1181,16 @@
   }
 }
 
-// ── Tablet (768–1023): header más compacto ───────────────────────────────
+// ── Tablet / laptop chico (745–1239): header más compacto ────────────────
 // El buscador se coloca en la misma fila que el logo y el botón de menú
 // (antes caía a una fila completa debajo). El menú desplegable sigue
 // abriéndose debajo, a todo el ancho. Va después de las reglas
 // max-width:1239px para ganar en la cascada dentro del rango tablet.
-@include tablet {
+// IMPORTANTE: NO usar @include tablet aquí — ese mixin (de _grid.scss, que
+// pisa al de _mixins.scss) es min-width:745px SIN tope superior, así que se
+// filtraba al desktop (≥1240px) y rompía el nav a 2 líneas. El tope 1239px
+// lo limita al rango donde aún se usa el menú sandwich.
+@media only screen and (min-width: 745px) and (max-width: 1239px) {
   .site-header {
     .container {
       padding: 12px 18px;
